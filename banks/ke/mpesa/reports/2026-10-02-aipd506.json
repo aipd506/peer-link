@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "provider": "ke/mpesa",
+  "adapterRevision": "939a3975e8a0bdcd38ede58f171210fbcc0f5b15",
+  "harnessRevision": "939a3975e8a0bdcd38ede58f171210fbcc0f5b15",
+  "testedAt": "2026-10-02T21:26:00Z",
+  "reporter": "aipd506",
+  "surface": "app-receipt-detail",
+  "capability": "outgoing-kes-send-money",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/pending.synthetic.json",
+    "fixtures/send-money.synthetic.json"
+  ],
+  "limitations": [
+    "One contributor account; no independent multi-party reproduction.",
+    "Only completed outgoing KES Send Money transfers validated; Lipa na M-Pesa, Fuliza, airtime purchases, and incoming transfers stay unsupported.",
+    "Source authenticity, legal person identity, recipient credit and irreversible settlement are not proven.",
+    "Raw receipt payload remained in local mobile session inspection memory and is not published."
+  ],
+  "summary": "Account-owner-authorized session inspected Safaricom M-Pesa transfer receipt records and executed the repository transformer in memory against synthetic and live-shape transfer records. Completed status, KES amount in minor units, payer phone identifier, destination phone number, and UTC timestamps matched the official M-Pesa receipt details exactly. Pending transfers and unsupported types abstain cleanly without throwing."
+}
