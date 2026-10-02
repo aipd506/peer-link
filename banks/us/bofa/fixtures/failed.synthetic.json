@@ -1,0 +1,39 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic cancelled outgoing domestic USD transfer record from Bank of America Online Banking",
+  "input": {
+    "account": {
+      "id": "100000000001",
+      "accountNumber": "100000000001",
+      "routingNumber": "122000049",
+      "name": "Synthetic BofA Account Holder"
+    },
+    "transfers": [
+      {
+        "id": "BOFA-TR-20261002-00003",
+        "type": "domesticTransfer",
+        "direction": "debit",
+        "status": "CANCELLED",
+        "amount": "95.50",
+        "currency": "USD",
+        "postedAt": "2026-10-02T15:55:00Z",
+        "payer": {
+          "accountNumber": "100000000001",
+          "routingNumber": "122000049",
+          "name": "Synthetic BofA Account Holder"
+        },
+        "payee": {
+          "accountNumber": "300000000003",
+          "routingNumber": "021000021",
+          "name": "Synthetic Counterparty"
+        },
+        "memo": "Synthetic cancelled test"
+      }
+    ]
+  },
+  "transactionId": "BOFA-TR-20261002-00003",
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction failed or was cancelled"
+  }
+}

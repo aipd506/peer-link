@@ -1,0 +1,44 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic completed outgoing domestic USD transfer record from Bank of America Online Banking",
+  "input": {
+    "account": {
+      "id": "100000000001",
+      "accountNumber": "100000000001",
+      "routingNumber": "122000049",
+      "name": "Synthetic BofA Account Holder"
+    },
+    "transfers": [
+      {
+        "id": "BOFA-TR-20261002-00001",
+        "type": "domesticTransfer",
+        "direction": "debit",
+        "status": "COMPLETED",
+        "amount": "450.75",
+        "currency": "USD",
+        "postedAt": "2026-10-02T15:45:00Z",
+        "payer": {
+          "accountNumber": "100000000001",
+          "routingNumber": "122000049",
+          "name": "Synthetic BofA Account Holder"
+        },
+        "payee": {
+          "accountNumber": "300000000003",
+          "routingNumber": "021000021",
+          "name": "Synthetic Counterparty"
+        },
+        "memo": "Synthetic transfer test"
+      }
+    ]
+  },
+  "transactionId": "BOFA-TR-20261002-00001",
+  "expected": {
+    "outcome": "supported",
+    "amountMinor": "45075",
+    "currency": "USD",
+    "status": "COMPLETED",
+    "payerId": "122000049:100000000001",
+    "payeeId": "021000021:300000000003",
+    "timestamp": "2026-10-02T15:45:00Z"
+  }
+}
