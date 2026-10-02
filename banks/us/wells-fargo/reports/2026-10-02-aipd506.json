@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1",
+  "provider": "us/wells-fargo",
+  "adapterRevision": "e213e94c49bdb4a37479672d48bf9399cfb0d637",
+  "harnessRevision": "e213e94c49bdb4a37479672d48bf9399cfb0d637",
+  "testedAt": "2026-10-02T19:30:00Z",
+  "reporter": "aipd506",
+  "surface": "web-account-activity",
+  "capability": "outgoing-domestic-usd-wire-and-ach",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/completed.synthetic.json",
+    "fixtures/wire-completed.synthetic.json",
+    "fixtures/pending.synthetic.json"
+  ],
+  "limitations": [
+    "One contributor account; no independent multi-party reproduction.",
+    "Outgoing domestic USD ACH and wire debit transfers validated; other methods stay unsupported.",
+    "Source authenticity, legal entity identity, recipient credit and irreversible settlement are not proven.",
+    "Raw bank activity responses remained in local browser agent memory and are not published."
+  ],
+  "summary": "Account-owner-authorized session inspected Wells Fargo account activity and executed the pure repository transformer in memory against synthetic and live-shape transfer records. Status, USD amount in minor units, payer account id, recipient routing/account and UTC timestamps matched the web interface exactly. Unsupported transfer types and non-completed statuses abstain cleanly without throwing."
+}

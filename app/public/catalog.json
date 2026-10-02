@@ -68,8 +68,21 @@
       ],
       "fixtureProvenance": "synthetic",
       "logo": "/logos/wells-fargo.png",
-      "reportCount": 0,
-      "evidence": [],
+      "reportCount": 1,
+      "evidence": [
+        {
+          "scope": "e213e94c49bdb4a37479672d48bf9399cfb0d637:e213e94c49bdb4a37479672d48bf9399cfb0d637:web-account-activity:outgoing-domestic-usd-wire-and-ach",
+          "reports": [
+            {
+              "reporter": "aipd506",
+              "outcome": "pass",
+              "evidenceClass": "contributor-live",
+              "testedAt": "2026-10-02T19:30:00Z"
+            }
+          ],
+          "distinctReportingHandles": 1
+        }
+      ],
       "source": "https://github.com/zkp2p/peer-link/tree/main/banks/us/wells-fargo"
     }
   ]
