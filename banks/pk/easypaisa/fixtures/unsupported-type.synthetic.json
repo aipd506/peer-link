@@ -1,0 +1,32 @@
+{
+  "provenance": "synthetic",
+  "description": "Invented transaction with unsupported bill payment type.",
+  "input": {
+    "account": {
+      "mobileNumber": "+923000001234"
+    },
+    "transactions": [
+      {
+        "id": "ep-trx-00000001",
+        "type": "billPayment",
+        "direction": "debit",
+        "status": "SUCCESS",
+        "amount": "1500.00",
+        "currency": "PKR",
+        "timestamp": "2026-01-15T12:00:00Z",
+        "payer": {
+          "mobileNumber": "+923000001234"
+        },
+        "payee": {
+          "mobileNumber": "+923000005678",
+          "name": "Synthetic Payee"
+        }
+      }
+    ]
+  },
+  "transactionId": "ep-trx-00000001",
+  "expected": {
+    "outcome": "unsupported",
+    "reason": "Only outgoing PKR money transfers are supported"
+  }
+}

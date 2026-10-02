@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1",
+  "id": "pk/easypaisa",
+  "name": "Easypaisa",
+  "country": "PK",
+  "status": "experimental",
+  "version": "0.1.0",
+  "surface": "app-receipt-detail",
+  "capability": "Interpret outgoing PKR money transfers as sender reported debits",
+  "entrypoint": "interpretEasypaisa",
+  "maintainers": ["aipd506"],
+  "currencies": ["PKR"],
+  "unsupported": [
+    "incoming received transfers",
+    "mobile load and airtime packages",
+    "utility bill payments",
+    "merchant qr payments",
+    "cash deposits and agent withdrawals",
+    "cryptographic source authentication"
+  ],
+  "fixtureProvenance": "synthetic",
+  "logo": "/logos/easypaisa.png"
+}

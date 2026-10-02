@@ -1,0 +1,32 @@
+{
+  "provenance": "synthetic",
+  "description": "Invented transfer that failed execution.",
+  "input": {
+    "account": {
+      "mobileNumber": "+923000001234"
+    },
+    "transactions": [
+      {
+        "id": "ep-trx-00000001",
+        "type": "moneyTransfer",
+        "direction": "debit",
+        "status": "FAILED",
+        "amount": "1500.00",
+        "currency": "PKR",
+        "timestamp": "2026-01-15T12:00:00Z",
+        "payer": {
+          "mobileNumber": "+923000001234"
+        },
+        "payee": {
+          "mobileNumber": "+923000005678",
+          "name": "Synthetic Payee"
+        }
+      }
+    ]
+  },
+  "transactionId": "ep-trx-00000001",
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction is not bank-reported completed"
+  }
+}
