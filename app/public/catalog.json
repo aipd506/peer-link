@@ -25,8 +25,21 @@
       ],
       "fixtureProvenance": "synthetic",
       "logo": "/logos/itau.png",
-      "reportCount": 0,
-      "evidence": [],
+      "reportCount": 1,
+      "evidence": [
+        {
+          "scope": "8aa78368c9ef84919b5d77ccdf19613f3121d716:8aa78368c9ef84919b5d77ccdf19613f3121d716:mobile-app-pix-receipt:outgoing-completed-brl-pix",
+          "reports": [
+            {
+              "reporter": "aipd506",
+              "outcome": "pass",
+              "evidenceClass": "contributor-live",
+              "testedAt": "2026-10-02T19:30:00Z"
+            }
+          ],
+          "distinctReportingHandles": 1
+        }
+      ],
       "source": "https://github.com/zkp2p/peer-link/tree/main/banks/br/itau"
     },
     {
