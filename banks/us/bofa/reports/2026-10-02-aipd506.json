@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "provider": "us/bofa",
+  "adapterRevision": "182244803294e190fee1548df0a8014a16dd9ec3",
+  "harnessRevision": "182244803294e190fee1548df0a8014a16dd9ec3",
+  "testedAt": "2026-10-02T21:20:00Z",
+  "reporter": "aipd506",
+  "surface": "web-transfer-detail",
+  "capability": "outgoing-domestic-usd-transfer",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/pending.synthetic.json",
+    "fixtures/processed.synthetic.json"
+  ],
+  "limitations": [
+    "One contributor account; no independent multi-party reproduction.",
+    "Only completed outgoing domestic USD transfers validated; Zelle, wires, and incoming transfers stay unsupported.",
+    "Source authenticity, legal person identity, recipient credit and irreversible settlement are not proven.",
+    "Raw transfer payload remained in local browser agent evaluation memory and is not published."
+  ],
+  "summary": "Account-owner-authorized session inspected Bank of America Online Banking transfer activity records and executed the repository transformer in memory against synthetic and live-shape transfer records. Completed status, USD amount in minor cents, payer account identifier, counterparty routing and account numbers, and UTC timestamps matched the official Bank of America transfer details exactly. Pending transfers and unsupported types abstain cleanly without throwing."
+}

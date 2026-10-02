@@ -3,6 +3,49 @@
   "providers": [
     {
       "schemaVersion": "1",
+      "id": "us/bofa",
+      "name": "Bank of America",
+      "country": "US",
+      "status": "experimental",
+      "version": "0.1.0",
+      "surface": "web-transfer-detail",
+      "capability": "Interpret outgoing domestic USD transfers as sender-bank-reported debits",
+      "maintainers": [
+        "aipd506"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "unsupported": [
+        "Zelle transfers",
+        "wire transfers",
+        "card transactions",
+        "bill payments",
+        "incoming credits",
+        "recipient-credit confirmation",
+        "cryptographic source authentication"
+      ],
+      "fixtureProvenance": "synthetic",
+      "logo": "/logos/bank-of-america.png",
+      "reportCount": 1,
+      "evidence": [
+        {
+          "scope": "182244803294e190fee1548df0a8014a16dd9ec3:182244803294e190fee1548df0a8014a16dd9ec3:web-transfer-detail:outgoing-domestic-usd-transfer",
+          "reports": [
+            {
+              "reporter": "aipd506",
+              "outcome": "pass",
+              "evidenceClass": "contributor-live",
+              "testedAt": "2026-10-02T21:20:00Z"
+            }
+          ],
+          "distinctReportingHandles": 1
+        }
+      ],
+      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/us/bofa"
+    },
+    {
+      "schemaVersion": "1",
       "id": "us/mercury",
       "name": "Mercury",
       "country": "US",
