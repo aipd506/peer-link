@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1",
+  "id": "ke/mpesa",
+  "name": "Safaricom M-Pesa",
+  "country": "KE",
+  "status": "experimental",
+  "version": "0.1.0",
+  "surface": "app-receipt-detail",
+  "capability": "Interpret outgoing KES Send Money transfers as sender-reported debits",
+  "entrypoint": "interpretMpesa",
+  "maintainers": ["aipd506"],
+  "currencies": ["KES"],
+  "unsupported": [
+    "Lipa na M-Pesa Buy Goods",
+    "Lipa na M-Pesa Paybill",
+    "Fuliza overdraft",
+    "airtime purchases",
+    "incoming received transfers",
+    "reversals",
+    "cryptographic source authentication"
+  ],
+  "fixtureProvenance": "synthetic",
+  "logo": "/logos/14.png"
+}

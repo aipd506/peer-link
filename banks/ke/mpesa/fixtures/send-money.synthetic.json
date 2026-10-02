@@ -1,0 +1,35 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic successful outgoing KES Send Money transfer with Ksh prefix from Safaricom M-Pesa",
+  "input": {
+    "transactions": [
+      {
+        "id": "QA0000MP04",
+        "transactionType": "P2P",
+        "direction": "outgoing",
+        "status": "SUCCESS",
+        "amount": "Ksh 150.50",
+        "currency": "KES",
+        "timestamp": "2026-10-02T16:35:00Z",
+        "payer": {
+          "msisdn": "0700000001",
+          "name": "Synthetic Payer Example"
+        },
+        "payee": {
+          "msisdn": "254700000002",
+          "name": "Synthetic Payee Example"
+        }
+      }
+    ]
+  },
+  "transactionId": "QA0000MP04",
+  "expected": {
+    "outcome": "supported",
+    "amountMinor": "15050",
+    "currency": "KES",
+    "status": "SUCCESS",
+    "payerId": "+254700000001",
+    "payeeId": "+254700000002",
+    "timestamp": "2026-10-02T16:35:00Z"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic pending outgoing KES Send Money transfer from Safaricom M-Pesa",
+  "input": {
+    "account": {
+      "phone": "+254700000001",
+      "name": "Synthetic Payer Example"
+    },
+    "transactions": [
+      {
+        "id": "QA0000MP02",
+        "type": "sendMoney",
+        "direction": "debit",
+        "status": "PENDING",
+        "amount": "1000.00",
+        "currency": "KES",
+        "completedAt": "2026-10-02T16:25:00Z",
+        "payer": {
+          "phone": "+254700000001",
+          "name": "Synthetic Payer Example"
+        },
+        "payee": {
+          "phone": "+254700000002",
+          "name": "Synthetic Payee Example"
+        }
+      }
+    ]
+  },
+  "transactionId": "QA0000MP02",
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction is still pending execution"
+  }
+}
