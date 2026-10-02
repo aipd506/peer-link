@@ -1,0 +1,33 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic Cash Out transaction record from bKash app receipt that must abstain as unsupported",
+  "input": {
+    "account": {
+      "id": "+8801700000001",
+      "name": "Synthetic Payer"
+    },
+    "transactions": [
+      {
+        "id": "BK2026100200003",
+        "type": "cash_out",
+        "paymentType": "CashOut",
+        "direction": "debit",
+        "status": "COMPLETED",
+        "amount": "1000.00",
+        "currency": "BDT",
+        "bookedAt": "2026-10-02T16:30:00Z",
+        "payer": {
+          "mobileNumber": "+8801700000001"
+        },
+        "payee": {
+          "agentNumber": "01700000099"
+        }
+      }
+    ]
+  },
+  "transactionId": "BK2026100200003",
+  "expected": {
+    "outcome": "unsupported",
+    "reason": "Cash Out, merchant payments, and mobile recharge are excluded"
+  }
+}

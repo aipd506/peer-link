@@ -1,0 +1,44 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic completed outgoing BDT Send Money transfer record from bKash app receipt",
+  "input": {
+    "account": {
+      "id": "+8801700000001",
+      "name": "Synthetic Payer"
+    },
+    "transactions": [
+      {
+        "id": "BK2026100200001",
+        "type": "domesticTransfer",
+        "paymentType": "SendMoney",
+        "direction": "debit",
+        "status": "COMPLETED",
+        "amount": "1500.50",
+        "currency": "BDT",
+        "bookedAt": "2026-10-02T16:00:00Z",
+        "payer": {
+          "mobileNumber": "+8801700000001"
+        },
+        "payee": {
+          "mobileNumber": "+8801700000002",
+          "name": "Synthetic Payee"
+        }
+      }
+    ]
+  },
+  "transactionId": "BK2026100200001",
+  "expected": {
+    "outcome": "supported",
+    "payerId": "+8801700000001",
+    "payerScheme": "bd-msisdn",
+    "payeeId": "+8801700000002",
+    "payeeScheme": "bd-msisdn",
+    "amountMinor": "150050",
+    "currency": "BDT",
+    "currencyExponent": 2,
+    "direction": "outgoing",
+    "status": "COMPLETED",
+    "timestamp": "2026-10-02T16:00:00Z",
+    "timestampMeaning": "completedAt"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic failed outgoing BDT Send Money transfer record from bKash app receipt",
+  "input": {
+    "account": {
+      "id": "+8801700000001",
+      "name": "Synthetic Payer"
+    },
+    "transactions": [
+      {
+        "id": "BK2026100200004",
+        "type": "domesticTransfer",
+        "paymentType": "SendMoney",
+        "direction": "debit",
+        "status": "FAILED",
+        "amount": "300.00",
+        "currency": "BDT",
+        "bookedAt": "2026-10-02T16:45:00Z",
+        "payer": {
+          "mobileNumber": "+8801700000001"
+        },
+        "payee": {
+          "mobileNumber": "+8801700000002",
+          "name": "Synthetic Payee"
+        }
+      }
+    ]
+  },
+  "transactionId": "BK2026100200004",
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction failed or was reversed"
+  }
+}
