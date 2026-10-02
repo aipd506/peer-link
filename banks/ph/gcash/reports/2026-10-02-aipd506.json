@@ -9,7 +9,12 @@
   "capability": "outgoing-domestic-php-transfer",
   "outcome": "pass",
   "evidenceClass": "contributor-live",
-  "fixtureRefs": ["fixtures/completed.synthetic.json", "fixtures/pending.synthetic.json"],
+  "fixtureRefs": [
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/instapay.synthetic.json",
+    "fixtures/pending.synthetic.json"
+  ],
   "limitations": [
     "One contributor account; no independent multi-party reproduction.",
     "Only completed outgoing domestic PHP transfers validated; Cash-In, bill payments, and incoming transfers stay unsupported.",

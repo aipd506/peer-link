@@ -22,11 +22,28 @@ export function interpretGcash(input, transactionId) {
 
   const root = object(input);
   const account = object(root?.account);
-  if (!root || !account || !Array.isArray(root.transactions)) {
+
+  let txList = null;
+  if (Array.isArray(input)) {
+    txList = input;
+  } else if (Array.isArray(root?.transactions)) {
+    txList = root.transactions;
+  } else if (Array.isArray(root?.data)) {
+    txList = root.data;
+  } else if (root?.id === transactionId) {
+    txList = [root];
+  } else {
+    const wrapped = object(root?.receipt) ?? object(root?.data);
+    if (wrapped?.id === transactionId) {
+      txList = [wrapped];
+    }
+  }
+
+  if (!txList) {
     return fail("Expected account and transactions");
   }
 
-  const rows = root.transactions.filter((row) => object(row)?.id === transactionId);
+  const rows = txList.filter((r) => object(r)?.id === transactionId);
   if (rows.length !== 1) {
     return fail("Selected transaction must occur exactly once");
   }
@@ -44,7 +61,8 @@ export function interpretGcash(input, transactionId) {
   if (row.status === "PENDING" || row.status === "pending" || row.status === "PROCESSING") {
     return fail("Transaction is still pending bank execution");
   }
-  if (row.status !== "COMPLETED" && row.status !== "SUCCESS" && row.status !== "PAID") {
+  const completedStatuses = ["COMPLETED", "SUCCESS", "PAID"];
+  if (typeof row.status !== "string" || !completedStatuses.includes(row.status)) {
     return fail("Transaction is not bank-reported completed");
   }
 
@@ -52,8 +70,39 @@ export function interpretGcash(input, transactionId) {
     return fail("Missing or conflicting currency: only PHP is supported");
   }
 
-  const amountMatch =
-    typeof row.amount === "string" ? /^(0|[1-9]\d{0,14})(?:\.(\d+))?$/.exec(row.amount) : null;
+  // Parse amount: support Philippine formatting (optional ₱ / PHP prefix, comma thousands separators, decimal units)
+  let rawAmount = "";
+  if (typeof row.amount === "number") {
+    if (!Number.isFinite(row.amount) || row.amount <= 0) {
+      return fail("Amount must be a positive number");
+    }
+    rawAmount = row.amount.toString();
+  } else if (typeof row.amount === "string") {
+    rawAmount = row.amount.trim();
+  } else {
+    return fail("Amount must be a decimal string within currency precision");
+  }
+
+  // Strip currency prefixes: "₱", "PHP"
+  rawAmount = rawAmount
+    .replace(/^(?:PHP|₱)\s*/i, "")
+    .replace(/\s*(?:PHP|₱)$/i, "")
+    .trim();
+
+  // Strip comma thousand separators
+  if (rawAmount.includes(",")) {
+    const parts = rawAmount.split(",");
+    if (
+      parts.length >= 2 &&
+      parts.every((p, idx) => (idx === 0 ? /^\d{1,3}$/.test(p) : /^\d{3}(?:\.\d+)?$/.test(p)))
+    ) {
+      rawAmount = rawAmount.replaceAll(",", "");
+    } else {
+      return fail("Amount must be a decimal string within currency precision");
+    }
+  }
+
+  const amountMatch = /^(0|[1-9]\d{0,14})(?:\.(\d+))?$/.exec(rawAmount);
   const fraction = amountMatch?.[2] ?? "";
   if (!amountMatch || fraction.length > EXPONENT) {
     return fail("Amount must be a decimal string within currency precision");
@@ -79,18 +128,20 @@ export function interpretGcash(input, transactionId) {
   }
 
   const payer = object(row.payer) ?? account;
-  const payerId =
-    typeof payer.mobileNumber === "string"
+  const rawPayerId =
+    typeof payer?.mobileNumber === "string"
       ? payer.mobileNumber
-      : typeof payer.id === "string"
+      : typeof payer?.id === "string"
         ? payer.id
         : "";
-  if (!text(payerId) || payerId.includes("*") || payerId.includes("•")) {
+  if (!text(rawPayerId) || /[*•?]/.test(rawPayerId)) {
     return fail("Unmasked payer mobile number or account identifier is required");
   }
+  const payerId = rawPayerId.replace(/[\s-]/g, "");
+  const isPayerMobile = /^09\d{9}$|^\+639\d{9}$|^639\d{9}$/.test(payerId);
 
   const payee = object(row.payee);
-  const payeeId =
+  const rawPayeeId =
     typeof payee?.mobileNumber === "string"
       ? payee.mobileNumber
       : typeof payee?.accountNumber === "string"
@@ -98,9 +149,11 @@ export function interpretGcash(input, transactionId) {
         : typeof payee?.id === "string"
           ? payee.id
           : "";
-  if (!text(payeeId) || payeeId.includes("*") || payeeId.includes("•")) {
+  if (!text(rawPayeeId) || /[*•?]/.test(rawPayeeId)) {
     return fail("Unmasked counterparty mobile number or identifier is required");
   }
+  const payeeId = rawPayeeId.replace(/[\s-]/g, "");
+  const isPayeeMobile = /^09\d{9}$|^\+639\d{9}$|^639\d{9}$/.test(payeeId);
 
   return {
     outcome: "supported",
@@ -109,26 +162,20 @@ export function interpretGcash(input, transactionId) {
       provider: "ph/gcash",
       transactionId,
       payer: {
-        id: payerId,
-        scheme:
-          payerId.startsWith("09") || payerId.startsWith("+63")
-            ? "ph-mobile-number"
-            : "gcash-account-id",
+        id: isPayerMobile ? payerId : rawPayerId.trim(),
+        scheme: isPayerMobile ? "ph-mobile-number" : "gcash-account-id",
         provenance: "account.id",
       },
       payee: {
-        id: payeeId,
-        scheme:
-          payeeId.startsWith("09") || payeeId.startsWith("+63")
-            ? "ph-mobile-number"
-            : "ph-recipient-id",
+        id: isPayeeMobile ? payeeId : rawPayeeId.trim(),
+        scheme: isPayeeMobile ? "ph-mobile-number" : "ph-recipient-id",
         provenance: "transaction.payee",
       },
       amountMinor: minor.toString(),
       currency: CURRENCY,
       currencyExponent: EXPONENT,
       direction: "outgoing",
-      status: "completed",
+      status: row.status,
       timestamp: row.bookedAt,
       timestampMeaning: "bookedAt",
       sourceAuthenticated: false,
