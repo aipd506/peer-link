@@ -22,11 +22,28 @@ export function interpretZiraat(input, transactionId) {
 
   const root = object(input);
   const account = object(root?.account);
-  if (!root || !account || !Array.isArray(root.transactions)) {
+
+  let txList = null;
+  if (Array.isArray(input)) {
+    txList = input;
+  } else if (Array.isArray(root?.transactions)) {
+    txList = root.transactions;
+  } else if (Array.isArray(root?.data)) {
+    txList = root.data;
+  } else if (root?.id === transactionId) {
+    txList = [root];
+  } else {
+    const wrapped = object(root?.receipt) ?? object(root?.data);
+    if (wrapped?.id === transactionId) {
+      txList = [wrapped];
+    }
+  }
+
+  if (!txList) {
     return fail("Expected account and transactions");
   }
 
-  const rows = root.transactions.filter((row) => object(row)?.id === transactionId);
+  const rows = txList.filter((r) => object(r)?.id === transactionId);
   if (rows.length !== 1) {
     return fail("Selected transaction must occur exactly once");
   }
@@ -41,10 +58,23 @@ export function interpretZiraat(input, transactionId) {
     return { outcome: "unsupported", reason: "Only outgoing debit transfers are supported" };
   }
 
-  if (row.status === "BEKLEMEDE" || row.status === "pending") {
+  if (
+    row.status === "BEKLEMEDE" ||
+    row.status === "pending" ||
+    row.status === "PROCESSING" ||
+    row.status === "İNCELENİYOR"
+  ) {
     return fail("Transaction is still pending bank execution");
   }
-  if (row.status !== "COMPLETED") {
+  const completedStatuses = [
+    "COMPLETED",
+    "SUCCESS",
+    "BAŞARILI",
+    "GERÇEKLEŞTİ",
+    "TAMAMLANDI",
+    "ONAYLANDI",
+  ];
+  if (typeof row.status !== "string" || !completedStatuses.includes(row.status)) {
     return fail("Transaction is not bank-reported completed");
   }
 
@@ -52,16 +82,66 @@ export function interpretZiraat(input, transactionId) {
     return fail("Missing or conflicting currency: only TRY is supported");
   }
 
-  const amountMatch =
-    typeof row.amount === "string" ? /^(0|[1-9]\d{0,14})(?:\.(\d+))?$/.exec(row.amount) : null;
-  const fraction = amountMatch?.[2] ?? "";
-  if (!amountMatch || fraction.length > EXPONENT) {
+  // Parse amount: support Turkish formatting (period thousands, comma decimals), US formatting, or number
+  let rawAmount = "";
+  if (typeof row.amount === "number") {
+    if (!Number.isFinite(row.amount) || row.amount <= 0) {
+      return fail("Amount must be a positive number");
+    }
+    rawAmount = row.amount.toString();
+  } else if (typeof row.amount === "string") {
+    rawAmount = row.amount.trim();
+  } else {
     return fail("Amount must be a decimal string within currency precision");
   }
 
-  const minor =
-    BigInt(amountMatch[1]) * 10n ** BigInt(EXPONENT) +
-    BigInt(fraction.padEnd(EXPONENT, "0") || "0");
+  // Strip currency tokens: TL, ₺, TRY
+  rawAmount = rawAmount
+    .replace(/^(?:TRY|TL|₺)\s*/i, "")
+    .replace(/\s*(?:TRY|TL|₺)$/i, "")
+    .trim();
+
+  let whole = "";
+  let fraction = "";
+
+  if (rawAmount.includes(".") && rawAmount.includes(",")) {
+    const dotIdx = rawAmount.indexOf(".");
+    const commaIdx = rawAmount.indexOf(",");
+    if (dotIdx < commaIdx) {
+      // Turkish format: 1.250,75
+      whole = rawAmount.slice(0, commaIdx).replaceAll(".", "");
+      fraction = rawAmount.slice(commaIdx + 1);
+    } else {
+      // US format: 1,250.75
+      whole = rawAmount.slice(0, dotIdx).replaceAll(",", "");
+      fraction = rawAmount.slice(dotIdx + 1);
+    }
+  } else if (rawAmount.includes(",")) {
+    // Comma decimal: 1250,75
+    const parts = rawAmount.split(",");
+    if (parts.length !== 2) {
+      return fail("Amount must be a decimal string within currency precision");
+    }
+    whole = parts[0];
+    fraction = parts[1];
+  } else if (rawAmount.includes(".")) {
+    const parts = rawAmount.split(".");
+    if (parts.length === 2 && parts[1].length <= EXPONENT) {
+      whole = parts[0];
+      fraction = parts[1];
+    } else {
+      return fail("Amount must be a decimal string within currency precision");
+    }
+  } else {
+    whole = rawAmount;
+    fraction = "";
+  }
+
+  if (!/^(0|[1-9]\d{0,14})$/.test(whole) || !/^\d*$/.test(fraction) || fraction.length > EXPONENT) {
+    return fail("Amount must be a decimal string within currency precision");
+  }
+
+  const minor = BigInt(whole) * 100n + BigInt(fraction.padEnd(EXPONENT, "0") || "0");
   if (minor <= 0n) return fail("Amount must be positive");
 
   if (
@@ -79,22 +159,28 @@ export function interpretZiraat(input, transactionId) {
   }
 
   const payer = object(row.payer) ?? account;
-  const payerId =
-    typeof payer.iban === "string" ? payer.iban : typeof payer.id === "string" ? payer.id : "";
-  if (!text(payerId) || payerId.includes("*")) {
+  const rawPayerId =
+    typeof payer?.iban === "string" ? payer.iban : typeof payer?.id === "string" ? payer.id : "";
+  if (!text(rawPayerId) || /[*•?]/.test(rawPayerId)) {
     return fail("Unmasked payer IBAN or account identifier is required");
   }
+  const payerId = rawPayerId.replace(/[\s-]/g, "");
+  const isPayerTrIban = /^TR\d{24}$/.test(payerId);
 
   const payee = object(row.payee);
-  const payeeId =
+  const rawPayeeId =
     typeof payee?.iban === "string"
       ? payee.iban
       : typeof payee?.accountNumber === "string"
         ? payee.accountNumber
-        : "";
-  if (!text(payeeId) || payeeId.includes("*")) {
+        : typeof payee?.id === "string"
+          ? payee.id
+          : "";
+  if (!text(rawPayeeId) || /[*•?]/.test(rawPayeeId)) {
     return fail("Unmasked counterparty IBAN or identifier is required");
   }
+  const payeeId = rawPayeeId.replace(/[\s-]/g, "");
+  const isPayeeTrIban = /^TR\d{24}$/.test(payeeId);
 
   return {
     outcome: "supported",
@@ -103,20 +189,20 @@ export function interpretZiraat(input, transactionId) {
       provider: "tr/ziraat",
       transactionId,
       payer: {
-        id: payerId,
-        scheme: payerId.startsWith("TR") ? "tr-iban" : "ziraat-account-id",
+        id: isPayerTrIban ? payerId : rawPayerId.trim(),
+        scheme: isPayerTrIban ? "tr-iban" : "ziraat-account-id",
         provenance: "account.id",
       },
       payee: {
-        id: payeeId,
-        scheme: payeeId.startsWith("TR") ? "tr-iban" : "tr-recipient-id",
+        id: isPayeeTrIban ? payeeId : rawPayeeId.trim(),
+        scheme: isPayeeTrIban ? "tr-iban" : "tr-recipient-id",
         provenance: "transaction.payee",
       },
       amountMinor: minor.toString(),
       currency: CURRENCY,
       currencyExponent: EXPONENT,
       direction: "outgoing",
-      status: "completed",
+      status: row.status,
       timestamp: row.bookedAt,
       timestampMeaning: "bookedAt",
       sourceAuthenticated: false,

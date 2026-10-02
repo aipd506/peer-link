@@ -1,6 +1,6 @@
 {
   "provenance": "synthetic",
-  "description": "Synthetic completed outgoing TRY transfer record from Ziraat Mobil/Internet Banking",
+  "description": "Synthetic failed transfer record from Ziraat Mobil receipt",
   "input": {
     "account": {
       "id": "TR000000000000000000000001",
@@ -8,14 +8,14 @@
     },
     "transactions": [
       {
-        "id": "ZR2026100200001",
+        "id": "ZR2026100200004",
         "type": "domesticTransfer",
         "paymentType": "FAST",
         "direction": "debit",
-        "status": "COMPLETED",
-        "amount": "1250.75",
+        "status": "BAŞARISIZ",
+        "amount": "500.00",
         "currency": "TRY",
-        "bookedAt": "2026-10-02T14:30:00Z",
+        "bookedAt": "2026-10-02T15:30:00Z",
         "payer": {
           "iban": "TR000000000000000000000001",
           "name": "Synthetic Payer"
@@ -25,18 +25,13 @@
           "name": "Synthetic Payee",
           "bank": "Ziraat Bankasi"
         },
-        "memo": "Synthetic transfer reference test"
+        "memo": "Synthetic failed transfer"
       }
     ]
   },
-  "transactionId": "ZR2026100200001",
+  "transactionId": "ZR2026100200004",
   "expected": {
-    "outcome": "supported",
-    "amountMinor": "125075",
-    "currency": "TRY",
-    "status": "COMPLETED",
-    "payerId": "TR000000000000000000000001",
-    "payeeId": "TR000000000000000000000002",
-    "timestamp": "2026-10-02T14:30:00Z"
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction is not bank-reported completed"
   }
 }
