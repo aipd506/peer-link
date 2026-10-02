@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1",
+  "provider": "kz/kaspi",
+  "adapterRevision": "207dfc562066b99108d1d0c03d514db8718a5797",
+  "harnessRevision": "207dfc562066b99108d1d0c03d514db8718a5797",
+  "testedAt": "2026-10-02T15:40:00Z",
+  "reporter": "aipd506",
+  "surface": "mobile-app-receipt",
+  "capability": "outgoing-domestic-kzt-phone-and-card-transfer",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": ["fixtures/completed.synthetic.json", "fixtures/card-transfer.synthetic.json"],
+  "limitations": [
+    "1. One contributor verification session; independent reviewer reproduction pending.",
+    "2. Validated outgoing domestic KZT phone and card transfers; Kaspi Red installments, Kaspi Kredit, QR merchant pay, utility payments, and tax payments are excluded.",
+    "3. Kaspi display names without accompanying phone numbers or card numbers fail closed to prevent disambiguation failure.",
+    "4. Settlement finality reflects sender bank receipt reporting rather than interbank clearing guarantee."
+  ],
+  "summary": "Contributor evaluated the pure Kaspi Bank adapter in memory against representative mobile app receipt payload structures for outgoing phone and card transfers. The adapter extracted transaction identifiers, verified KZT currency and positive amounts, normalized telephone numbers and card numbers, and failed closed on pending statuses and partial display names."
+}
