@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "provider": "ng/opay",
+  "adapterRevision": "3bc0e92dda450e2235e4385d9c40eceece8bfef8",
+  "harnessRevision": "3bc0e92dda450e2235e4385d9c40eceece8bfef8",
+  "testedAt": "2026-10-02T21:30:00Z",
+  "reporter": "aipd506",
+  "surface": "app-receipt-detail",
+  "capability": "outgoing-domestic-ngn-transfer",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/pending.synthetic.json",
+    "fixtures/wallet-transfer.synthetic.json"
+  ],
+  "limitations": [
+    "One contributor account; no independent multi-party reproduction.",
+    "Only completed outgoing NGN domestic transfers validated; airtime, bills, betting, and incoming transfers stay unsupported.",
+    "Source authenticity, legal person identity, recipient credit and irreversible settlement are not proven.",
+    "Raw receipt payload remained in local mobile session inspection memory and is not published."
+  ],
+  "summary": "Account-owner-authorized session inspected OPay transfer receipt records and executed the repository transformer in memory against synthetic and live-shape transfer records. Completed status, NGN amount in minor kobo, payer NUBAN identifier, destination account details, and UTC timestamps matched the official OPay receipt details exactly. Pending transfers and unsupported types abstain cleanly without throwing."
+}
