@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "provider": "bd/bkash",
+  "adapterRevision": "f2c4489f7328ed6f0702ca8cac5b459ad1ced56d",
+  "harnessRevision": "f2c4489f7328ed6f0702ca8cac5b459ad1ced56d",
+  "testedAt": "2026-10-02T22:30:00Z",
+  "reporter": "aipd506",
+  "surface": "mobile-app-receipt",
+  "capability": "outgoing-domestic-bdt-send-money",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/cash-out-unsupported.synthetic.json",
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/pending.synthetic.json"
+  ],
+  "limitations": [
+    "Single contributor verification without independent third party multi session reproduction.",
+    "Only completed outgoing domestic BDT Send Money transfers are verified; Cash Out, merchant payments, and recharges abstain.",
+    "Cryptographic origin authenticity and recipient credit finality are not attested by this parser.",
+    "bKash app receipt payload was inspected in local contributor memory and omitted from repository history."
+  ],
+  "summary": "Account owner session verified outgoing domestic bKash BDT Send Money transfers in local memory. Parsing correctly extracted transaction TrxID identifier, exact minor units in poisha, sender phone number, destination phone number, completed status, and UTC timestamp. Cash Out, pending, and failed records abstain cleanly without throwing."
+}
