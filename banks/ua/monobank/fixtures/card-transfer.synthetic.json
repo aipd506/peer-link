@@ -1,0 +1,48 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic completed outgoing domestic UAH card transfer record from Monobank statement",
+  "input": {
+    "account": {
+      "iban": "UA213220010000026007233566001",
+      "name": "Synthetic Payer"
+    },
+    "transactions": [
+      {
+        "id": "mono-tx-20261002-003",
+        "time": 1790958600,
+        "description": "Переказ на картку",
+        "mcc": 4829,
+        "amount": -50000,
+        "operationAmount": -50000,
+        "currencyCode": 980,
+        "currency": "UAH",
+        "direction": "debit",
+        "hold": false,
+        "status": "SUCCESS",
+        "completedAt": "2026-10-02T16:30:00Z",
+        "payer": {
+          "iban": "UA213220010000026007233566001"
+        },
+        "payee": {
+          "cardNumber": "4149490000001234",
+          "name": "Synthetic Recipient"
+        }
+      }
+    ]
+  },
+  "transactionId": "mono-tx-20261002-003",
+  "expected": {
+    "outcome": "supported",
+    "payerId": "UA213220010000026007233566001",
+    "payerScheme": "ua-iban",
+    "payeeId": "4149490000001234",
+    "payeeScheme": "pan",
+    "amountMinor": "50000",
+    "currency": "UAH",
+    "currencyExponent": 2,
+    "direction": "outgoing",
+    "status": "SUCCESS",
+    "timestamp": "2026-10-02T16:30:00Z",
+    "timestampMeaning": "completedAt"
+  }
+}

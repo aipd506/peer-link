@@ -1,0 +1,36 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic pending outgoing domestic UAH transfer record on hold from Monobank statement",
+  "input": {
+    "account": {
+      "iban": "UA213220010000026007233566001",
+      "name": "Synthetic Payer"
+    },
+    "transactions": [
+      {
+        "id": "mono-tx-20261002-002",
+        "time": 1790957700,
+        "description": "Переказ на IBAN",
+        "mcc": 4829,
+        "amount": -50000,
+        "operationAmount": -50000,
+        "currencyCode": 980,
+        "currency": "UAH",
+        "direction": "debit",
+        "hold": true,
+        "status": "PENDING",
+        "completedAt": "2026-10-02T16:15:00Z",
+        "payer": {
+          "iban": "UA213220010000026007233566001"
+        },
+        "counterIban": "UA843052990000026008123456789",
+        "counterName": "Synthetic Payee"
+      }
+    ]
+  },
+  "transactionId": "mono-tx-20261002-002",
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction is still pending execution"
+  }
+}

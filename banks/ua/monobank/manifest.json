@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "id": "ua/monobank",
+  "name": "Monobank",
+  "country": "UA",
+  "status": "experimental",
+  "version": "0.1.0",
+  "surface": "mobile-app-statement",
+  "capability": "Interpret outgoing domestic UAH card and IBAN transfers as sender-bank-reported debits",
+  "entrypoint": "interpretMonobank",
+  "maintainers": ["aipd506"],
+  "currencies": ["UAH"],
+  "unsupported": [
+    "merchant-card-purchases",
+    "utility-and-bill-payments",
+    "mobile-topup",
+    "fx-currency-exchange",
+    "incoming-credits",
+    "cash-withdrawals",
+    "jar-accumulations",
+    "cryptographic-source-authentication"
+  ],
+  "fixtureProvenance": "synthetic",
+  "logo": "/logos/monobank.png"
+}
