@@ -156,6 +156,9 @@ describe("BBVA Spain payment evidence", () => {
     ["EUR 1,250.75", "125075"],
     ["1.250,75", "125075"],
     ["1250,50", "125050"],
+    ["1 250,50 €", "125050"],
+    ["1 250.50 €", "125050"],
+    ["1 250 €", "125000"],
     ["100", "10000"],
   ])("converts %s to %s minor units correctly", (amount, expectedMinor) => {
     const result = run(change({ amount }));
