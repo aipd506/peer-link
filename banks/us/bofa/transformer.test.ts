@@ -387,6 +387,34 @@ describe("interpretBofa unit and contract coverage", () => {
       "insufficient_evidence",
     );
 
+    const xMaskedPayer = structuredClone(VALID_INPUT);
+    xMaskedPayer.transfers[0].payer.accountNumber = "XXXX9876";
+    delete (xMaskedPayer.account as Record<string, unknown>).accountNumber;
+    expect(interpretBofa(xMaskedPayer, "BOFA-TR-20261002-00001").outcome).toBe(
+      "insufficient_evidence",
+    );
+
+    const shortPayer = structuredClone(VALID_INPUT);
+    shortPayer.transfers[0].payer.accountNumber = "12";
+    delete (shortPayer.account as Record<string, unknown>).accountNumber;
+    expect(interpretBofa(shortPayer, "BOFA-TR-20261002-00001").outcome).toBe(
+      "insufficient_evidence",
+    );
+
+    const longPayer = structuredClone(VALID_INPUT);
+    longPayer.transfers[0].payer.accountNumber = "123456789012345678";
+    delete (longPayer.account as Record<string, unknown>).accountNumber;
+    expect(interpretBofa(longPayer, "BOFA-TR-20261002-00001").outcome).toBe(
+      "insufficient_evidence",
+    );
+
+    const badPayerRouting = structuredClone(VALID_INPUT);
+    badPayerRouting.transfers[0].payer.routingNumber = "123";
+    delete (badPayerRouting.account as Record<string, unknown>).routingNumber;
+    expect(interpretBofa(badPayerRouting, "BOFA-TR-20261002-00001").outcome).toBe(
+      "insufficient_evidence",
+    );
+
     const missingPayer = structuredClone(VALID_INPUT);
     delete (missingPayer.transfers[0].payer as Record<string, unknown>).accountNumber;
     delete (missingPayer.transfers[0].payer as Record<string, unknown>).id;

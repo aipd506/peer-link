@@ -172,8 +172,14 @@ export function interpretBofa(input, transactionId) {
     return fail("Unmasked payer account identifier is required");
   }
   const payerAcc = rawPayerAcc.replace(/[\s-]/g, "");
-  const payerRouting =
-    typeof payer?.routingNumber === "string" ? payer.routingNumber.replace(/[\s-]/g, "") : "";
+  if (!/^\d{4,17}$/.test(payerAcc)) {
+    return fail("Payer account number must be between 4 and 17 digits");
+  }
+  const rawPayerRouting = typeof payer?.routingNumber === "string" ? payer.routingNumber : "";
+  const payerRouting = rawPayerRouting.replace(/[\s-]/g, "");
+  if (text(rawPayerRouting) && !/^\d{9}$/.test(payerRouting)) {
+    return fail("Payer routing number must be a nine digit routing number");
+  }
   const hasPayerRouting = /^\d{9}$/.test(payerRouting);
 
   const payee = object(row.payee);
