@@ -196,8 +196,12 @@ export function interpretOpay(input, transactionId) {
   }
 
   let payeeId = payeeNuban;
-  if (isNip && typeof payee?.bankCode === "string" && /^[a-zA-Z0-9]{3,6}$/.test(payee.bankCode)) {
-    payeeId = `${payee.bankCode}:${payeeNuban}`;
+  if (isNip) {
+    const rawBankCode = typeof payee?.bankCode === "string" ? payee.bankCode.trim() : "";
+    if (!/^[a-zA-Z0-9]{3,6}$/.test(rawBankCode)) {
+      return fail("Bank transfer requires a valid destination bank code");
+    }
+    payeeId = `${rawBankCode}:${payeeNuban}`;
   }
 
   return {

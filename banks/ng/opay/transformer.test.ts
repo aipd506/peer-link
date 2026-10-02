@@ -231,29 +231,38 @@ describe("interpretOpay unit tests", () => {
     expect(result4.outcome).toBe("supported");
   });
 
-  it("handles bankCode in payee for NIP and wallet transfer without bankCode", () => {
+  it("requires valid bankCode for NIP transfers and supports wallet transfers without bankCode", () => {
     const noBankCode = structuredClone(VALID_INPUT);
     delete (noBankCode.transactions[0].payee as Record<string, unknown>).bankCode;
     const result1 = interpretOpay(noBankCode, "OPAY0000TX01");
-    expect(result1.outcome).toBe("supported");
-    if (result1.outcome === "supported") {
-      expect(result1.payment.payee.id).toBe("0000000002");
+    expect(result1.outcome).toBe("insufficient_evidence");
+    if (result1.outcome === "insufficient_evidence") {
+      expect(result1.reason).toContain("destination bank code");
     }
 
     const invalidBankCode = structuredClone(VALID_INPUT);
     (invalidBankCode.transactions[0].payee as Record<string, unknown>).bankCode = "AB";
     const result2 = interpretOpay(invalidBankCode, "OPAY0000TX01");
-    expect(result2.outcome).toBe("supported");
-    if (result2.outcome === "supported") {
-      expect(result2.payment.payee.id).toBe("0000000002");
+    expect(result2.outcome).toBe("insufficient_evidence");
+    if (result2.outcome === "insufficient_evidence") {
+      expect(result2.reason).toContain("destination bank code");
     }
 
     const walletTx = structuredClone(VALID_INPUT);
     walletTx.transactions[0].type = "walletTransfer";
+    delete (walletTx.transactions[0].payee as Record<string, unknown>).bankCode;
     const result3 = interpretOpay(walletTx, "OPAY0000TX01");
     expect(result3.outcome).toBe("supported");
     if (result3.outcome === "supported") {
       expect(result3.payment.payee.id).toBe("0000000002");
+    }
+
+    const validNip = structuredClone(VALID_INPUT);
+    (validNip.transactions[0].payee as Record<string, unknown>).bankCode = "058";
+    const result4 = interpretOpay(validNip, "OPAY0000TX01");
+    expect(result4.outcome).toBe("supported");
+    if (result4.outcome === "supported") {
+      expect(result4.payment.payee.id).toBe("058:0000000002");
     }
   });
 
