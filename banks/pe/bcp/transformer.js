@@ -149,6 +149,10 @@ export function interpretBcp(input, transactionId) {
     fraction = "";
   }
 
+  if (/^\d{1,3}([\s\u00A0\u202F]\d{3})+$/.test(whole)) {
+    whole = whole.replace(/[\s\u00A0\u202F]/g, "");
+  }
+
   if (!/^(0|[1-9]\d{0,14})$/.test(whole) || !/^\d*$/.test(fraction) || fraction.length > EXPONENT) {
     return fail("Amount must be a decimal string within currency precision");
   }

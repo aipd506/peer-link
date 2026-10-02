@@ -176,6 +176,9 @@ describe("BCP Peru payment evidence", () => {
     ["S/ 250,00", "25000"],
     ["S/. 1,250.75", "125075"],
     ["1.250,75", "125075"],
+    ["S/ 1 250,50", "125050"],
+    ["1 250.50", "125050"],
+    ["1 250 PEN", "125000"],
     ["PEN 500.00", "50000"],
     ["500 PEN", "50000"],
   ])("converts formatted amount %s to %s minor units correctly", (amount, expectedMinor) => {
