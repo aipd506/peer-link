@@ -162,6 +162,8 @@ describe("Bancolombia payment evidence", () => {
     ["50000.00", "50000"],
     ["$ 1.500.000", "1500000"],
     ["1,500,000", "1500000"],
+    ["$ 1 500 000", "1500000"],
+    ["1 500 000 COP", "1500000"],
   ])("converts formatted amount %s to %s minor units correctly", (amount, expectedMinor) => {
     const result = run(change({ amount }));
     expect(result.outcome).toBe("supported");

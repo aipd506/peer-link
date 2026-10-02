@@ -110,6 +110,8 @@ export function interpretBancolombia(input, transactionId) {
     rawAmount = rawAmount.replaceAll(".", "");
   } else if (/^\d{1,3}(,\d{3})+$/.test(rawAmount)) {
     rawAmount = rawAmount.replaceAll(",", "");
+  } else if (/^\d{1,3}([\s\u00A0\u202F]\d{3})+$/.test(rawAmount)) {
+    rawAmount = rawAmount.replace(/[\s\u00A0\u202F]/g, "");
   }
 
   if (!/^(0|[1-9]\d{0,14})$/.test(rawAmount)) {
