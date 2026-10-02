@@ -3,6 +3,48 @@
   "providers": [
     {
       "schemaVersion": "1",
+      "id": "ar/uala",
+      "name": "Uala Argentina",
+      "country": "AR",
+      "status": "experimental",
+      "version": "0.1.0",
+      "surface": "app-receipt-detail",
+      "capability": "Interpret outgoing ARS transfers by CVU and alias as sender reported debits",
+      "maintainers": [
+        "aipd506"
+      ],
+      "currencies": [
+        "ARS"
+      ],
+      "unsupported": [
+        "incoming received transfers",
+        "credit and prepaid card purchases",
+        "utility and bill payments",
+        "crypto and investment operations",
+        "cash deposits and withdrawals",
+        "cryptographic source authentication"
+      ],
+      "fixtureProvenance": "synthetic",
+      "logo": "/logos/uala.png",
+      "reportCount": 1,
+      "evidence": [
+        {
+          "scope": "ce23aad5f8bb74649150db0a796636e677c596f8:ce23aad5f8bb74649150db0a796636e677c596f8:app-receipt-detail:outgoing-ars-cvu-alias-transfer",
+          "reports": [
+            {
+              "reporter": "aipd506",
+              "outcome": "pass",
+              "evidenceClass": "contributor-live",
+              "testedAt": "2026-10-02T22:35:00Z"
+            }
+          ],
+          "distinctReportingHandles": 1
+        }
+      ],
+      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/ar/uala"
+    },
+    {
+      "schemaVersion": "1",
       "id": "us/mercury",
       "name": "Mercury",
       "country": "US",
