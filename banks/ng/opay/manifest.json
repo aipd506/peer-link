@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1",
+  "id": "ng/opay",
+  "name": "OPay",
+  "country": "NG",
+  "status": "experimental",
+  "version": "0.1.0",
+  "surface": "app-receipt-detail",
+  "capability": "Interpret outgoing NGN domestic transfers as sender-reported debits",
+  "entrypoint": "interpretOpay",
+  "maintainers": ["aipd506"],
+  "currencies": ["NGN"],
+  "unsupported": [
+    "airtime purchases",
+    "bill payments",
+    "betting funding",
+    "merchant QR payments",
+    "incoming received transfers",
+    "reversals",
+    "cryptographic source authentication"
+  ],
+  "fixtureProvenance": "synthetic",
+  "logo": "/logos/opay.png"
+}

@@ -1,0 +1,35 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic successful outgoing NGN wallet transfer with currency prefix from OPay",
+  "input": {
+    "transactions": [
+      {
+        "id": "OPAY0000TX04",
+        "type": "walletTransfer",
+        "direction": "outgoing",
+        "status": "SUCCESS",
+        "amount": "₦2,500.00",
+        "currency": "NGN",
+        "transferredAt": "2026-10-02T16:35:00Z",
+        "payer": {
+          "phone": "08000000001",
+          "name": "Synthetic OPay Sender"
+        },
+        "payee": {
+          "phone": "08000000002",
+          "name": "Synthetic Wallet Payee"
+        }
+      }
+    ]
+  },
+  "transactionId": "OPAY0000TX04",
+  "expected": {
+    "outcome": "supported",
+    "amountMinor": "250000",
+    "currency": "NGN",
+    "status": "SUCCESS",
+    "payerId": "8000000001",
+    "payeeId": "8000000002",
+    "timestamp": "2026-10-02T16:35:00Z"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic completed outgoing NGN bank transfer from OPay",
+  "input": {
+    "account": {
+      "accountNumber": "8000000001",
+      "name": "Synthetic OPay Sender"
+    },
+    "transactions": [
+      {
+        "id": "OPAY0000TX01",
+        "type": "bankTransfer",
+        "direction": "debit",
+        "status": "COMPLETED",
+        "amount": "5000.00",
+        "currency": "NGN",
+        "completedAt": "2026-10-02T16:20:00Z",
+        "payer": {
+          "accountNumber": "8000000001",
+          "name": "Synthetic OPay Sender"
+        },
+        "payee": {
+          "accountNumber": "0000000002",
+          "bankCode": "058",
+          "name": "Synthetic Recipient Corp"
+        }
+      }
+    ]
+  },
+  "transactionId": "OPAY0000TX01",
+  "expected": {
+    "outcome": "supported",
+    "amountMinor": "500000",
+    "currency": "NGN",
+    "status": "COMPLETED",
+    "payerId": "8000000001",
+    "payeeId": "058:0000000002",
+    "timestamp": "2026-10-02T16:20:00Z"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic failed outgoing NGN transfer from OPay",
+  "input": {
+    "account": {
+      "accountNumber": "8000000001",
+      "name": "Synthetic OPay Sender"
+    },
+    "transactions": [
+      {
+        "id": "OPAY0000TX03",
+        "type": "bankTransfer",
+        "direction": "debit",
+        "status": "FAILED",
+        "amount": "2000.00",
+        "currency": "NGN",
+        "completedAt": "2026-10-02T16:30:00Z",
+        "payer": {
+          "accountNumber": "8000000001",
+          "name": "Synthetic OPay Sender"
+        },
+        "payee": {
+          "accountNumber": "0000000002",
+          "bankCode": "058",
+          "name": "Synthetic Recipient Corp"
+        }
+      }
+    ]
+  },
+  "transactionId": "OPAY0000TX03",
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction failed or was reversed"
+  }
+}
