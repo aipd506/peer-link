@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1",
+  "provider": "gh/mtn",
+  "adapterRevision": "e909b74383d6f319f7ca207a89dff9816ab91854",
+  "harnessRevision": "e909b74383d6f319f7ca207a89dff9816ab91854",
+  "testedAt": "2026-10-02T21:19:00Z",
+  "reporter": "aipd506",
+  "surface": "mobile-app-receipt",
+  "capability": "outgoing-domestic-ghs-transfer",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/ghs-format.synthetic.json",
+    "fixtures/pending.synthetic.json"
+  ],
+  "limitations": [
+    "One contributor account evaluated without independent multi party reproduction.",
+    "Only completed outgoing domestic GHS transfers between MTN MoMo wallets validated.",
+    "Merchant payments, agent cash out, and airtime topups stay unsupported.",
+    "Source authenticity, legal person identity, recipient credit, and irreversible settlement are not proven.",
+    "Raw receipt payload remained in local browser agent evaluation memory and is not published."
+  ],
+  "summary": "Account owner authorized session inspected MTN MoMo Ghana mobile receipt records and executed repository transformer in memory against synthetic and live shape transfer records. Completed status, GHS amount in pesewas, sender Ghana mobile number, counterparty Ghana mobile number, and UTC timestamps matched the official receipt payload exactly. Pending transfers and unsupported payment types abstain cleanly without throwing."
+}

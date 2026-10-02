@@ -3,6 +3,51 @@
   "providers": [
     {
       "schemaVersion": "1",
+      "id": "gh/mtn",
+      "name": "MTN MoMo Ghana",
+      "country": "GH",
+      "status": "experimental",
+      "version": "0.1.0",
+      "surface": "mobile-app-receipt",
+      "capability": "Interpret outgoing domestic GHS transfers as sender-bank-reported debits",
+      "maintainers": [
+        "aipd506"
+      ],
+      "currencies": [
+        "GHS"
+      ],
+      "unsupported": [
+        "merchant-payments",
+        "agent-cash-out",
+        "airtime-topups",
+        "bill-payments",
+        "bank-push-pull",
+        "cross-border-remittances",
+        "incoming-credits",
+        "recipient-credit-confirmation",
+        "cryptographic-source-authentication"
+      ],
+      "fixtureProvenance": "synthetic",
+      "logo": "/logos/mtn-momo.png",
+      "reportCount": 1,
+      "evidence": [
+        {
+          "scope": "e909b74383d6f319f7ca207a89dff9816ab91854:e909b74383d6f319f7ca207a89dff9816ab91854:mobile-app-receipt:outgoing-domestic-ghs-transfer",
+          "reports": [
+            {
+              "reporter": "aipd506",
+              "outcome": "pass",
+              "evidenceClass": "contributor-live",
+              "testedAt": "2026-10-02T21:19:00Z"
+            }
+          ],
+          "distinctReportingHandles": 1
+        }
+      ],
+      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/gh/mtn"
+    },
+    {
+      "schemaVersion": "1",
       "id": "us/mercury",
       "name": "Mercury",
       "country": "US",
