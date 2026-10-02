@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "provider": "pk/easypaisa",
+  "adapterRevision": "35834481901b38db6dba5c50f83d27a5124906a5",
+  "harnessRevision": "35834481901b38db6dba5c50f83d27a5124906a5",
+  "testedAt": "2026-10-02T22:34:00Z",
+  "reporter": "aipd506",
+  "surface": "app-receipt-detail",
+  "capability": "outgoing-pkr-money-transfer",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/pending.synthetic.json",
+    "fixtures/unsupported-type.synthetic.json"
+  ],
+  "limitations": [
+    "One contributor account; no independent multi-party reproduction.",
+    "Only completed outgoing PKR money transfers validated; airtime packages, bill payments, merchant QR transactions, agent cash withdrawals, and incoming transfers stay unsupported.",
+    "Source authenticity, legal person identity, recipient credit and irreversible settlement are not proven.",
+    "Raw receipt payload remained in local mobile session inspection memory and is not published."
+  ],
+  "summary": "Account owner authorized session inspected Easypaisa Pakistan transfer receipt records and executed the repository transformer in memory against synthetic and live shape transfer records. Completed status, PKR amount in paisas, payer mobile number identifier, recipient mobile number identifier, TRX tracking identifier, and UTC timestamps matched the official Easypaisa receipt details exactly. Pending transfers and unsupported types abstain cleanly without throwing."
+}

@@ -3,6 +3,48 @@
   "providers": [
     {
       "schemaVersion": "1",
+      "id": "pk/easypaisa",
+      "name": "Easypaisa",
+      "country": "PK",
+      "status": "experimental",
+      "version": "0.1.0",
+      "surface": "app-receipt-detail",
+      "capability": "Interpret outgoing PKR money transfers as sender reported debits",
+      "maintainers": [
+        "aipd506"
+      ],
+      "currencies": [
+        "PKR"
+      ],
+      "unsupported": [
+        "incoming received transfers",
+        "mobile load and airtime packages",
+        "utility bill payments",
+        "merchant qr payments",
+        "cash deposits and agent withdrawals",
+        "cryptographic source authentication"
+      ],
+      "fixtureProvenance": "synthetic",
+      "logo": "/logos/easypaisa.png",
+      "reportCount": 1,
+      "evidence": [
+        {
+          "scope": "35834481901b38db6dba5c50f83d27a5124906a5:35834481901b38db6dba5c50f83d27a5124906a5:app-receipt-detail:outgoing-pkr-money-transfer",
+          "reports": [
+            {
+              "reporter": "aipd506",
+              "outcome": "pass",
+              "evidenceClass": "contributor-live",
+              "testedAt": "2026-10-02T22:34:00Z"
+            }
+          ],
+          "distinctReportingHandles": 1
+        }
+      ],
+      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/pk/easypaisa"
+    },
+    {
+      "schemaVersion": "1",
       "id": "us/mercury",
       "name": "Mercury",
       "country": "US",
