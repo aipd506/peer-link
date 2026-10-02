@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1",
+  "provider": "pe/bcp",
+  "adapterRevision": "1d0246c85f300c5c819f9281c9a52efe10e82e3f",
+  "harnessRevision": "1d0246c85f300c5c819f9281c9a52efe10e82e3f",
+  "testedAt": "2026-10-02T21:32:00Z",
+  "reporter": "aipd506",
+  "surface": "web-banking-receipt",
+  "capability": "outgoing-domestic-pen-transfer",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/interbank-cci.synthetic.json",
+    "fixtures/pending.synthetic.json"
+  ],
+  "limitations": [
+    "One contributor account evaluated without independent multi party reproduction.",
+    "Only completed outgoing domestic PEN transfers between BCP or interbank CCI destinations validated.",
+    "Yape mobile wallet payments, international wires, and bill payments stay unsupported.",
+    "Source authenticity, legal person identity, recipient credit, and irreversible settlement are not proven.",
+    "Raw transaction payload remained in local browser agent evaluation memory and is not published."
+  ],
+  "summary": "Account owner authorized session inspected Banco de Credito del Peru web banking transfer records and executed repository transformer in memory against synthetic and live shape transfer records. Completed status, PEN amount in centimos, sender BCP account, counterparty BCP or CCI account, and UTC timestamps matched the official transfer payload exactly. Pending transfers and unsupported payment types abstain cleanly without throwing."
+}
