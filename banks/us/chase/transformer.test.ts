@@ -394,6 +394,34 @@ describe("interpretChase unit and contract coverage", () => {
       "insufficient_evidence",
     );
 
+    const xMaskedPayer = structuredClone(VALID_INPUT);
+    xMaskedPayer.transactions[0].payer.accountNumber = "XXXX1234";
+    delete (xMaskedPayer.account as Record<string, unknown>).accountNumber;
+    expect(interpretChase(xMaskedPayer, "CHASE-ACH-20261002-00001").outcome).toBe(
+      "insufficient_evidence",
+    );
+
+    const shortPayer = structuredClone(VALID_INPUT);
+    shortPayer.transactions[0].payer.accountNumber = "12";
+    delete (shortPayer.account as Record<string, unknown>).accountNumber;
+    expect(interpretChase(shortPayer, "CHASE-ACH-20261002-00001").outcome).toBe(
+      "insufficient_evidence",
+    );
+
+    const longPayer = structuredClone(VALID_INPUT);
+    longPayer.transactions[0].payer.accountNumber = "123456789012345678";
+    delete (longPayer.account as Record<string, unknown>).accountNumber;
+    expect(interpretChase(longPayer, "CHASE-ACH-20261002-00001").outcome).toBe(
+      "insufficient_evidence",
+    );
+
+    const badPayerRouting = structuredClone(VALID_INPUT);
+    badPayerRouting.transactions[0].payer.routingNumber = "123";
+    delete (badPayerRouting.account as Record<string, unknown>).routingNumber;
+    expect(interpretChase(badPayerRouting, "CHASE-ACH-20261002-00001").outcome).toBe(
+      "insufficient_evidence",
+    );
+
     const missingPayer = structuredClone(VALID_INPUT);
     delete (missingPayer.transactions[0].payer as Record<string, unknown>).accountNumber;
     delete (missingPayer.transactions[0].payer as Record<string, unknown>).id;
