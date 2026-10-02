@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "provider": "vn/vietcombank",
+  "adapterRevision": "3e90682f97739c20b76f455b6758509d887cfc6e",
+  "harnessRevision": "3e90682f97739c20b76f455b6758509d887cfc6e",
+  "testedAt": "2026-10-02T22:30:00Z",
+  "reporter": "aipd506",
+  "surface": "vcb-digibank-transaction-detail",
+  "capability": "outgoing-domestic-vnd-transfer",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/interbank-napas.synthetic.json",
+    "fixtures/pending.synthetic.json"
+  ],
+  "limitations": [
+    "Single contributor verification without independent third party multi session reproduction.",
+    "Only completed outgoing domestic VND intra-bank and NAPAS 247 transfers are verified; bill payments and mobile top-ups abstain.",
+    "Cryptographic origin authenticity and recipient credit finality are not attested by this parser.",
+    "VCB Digibank detail payload was inspected in local contributor memory and omitted from repository history."
+  ],
+  "summary": "Account owner session verified outgoing domestic Vietcombank VND transfers in local memory. Parsing correctly extracted transaction identifier, whole VND amount with exponent 0, sender account number, recipient bank account number, completed status, and UTC timestamp. Pending and failed records abstain cleanly without throwing."
+}
