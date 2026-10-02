@@ -217,6 +217,24 @@ describe("interpretMpesa unit tests", () => {
     const incoming = structuredClone(VALID_INPUT);
     incoming.transactions[0].direction = "credit";
     expect(interpretMpesa(incoming, "QA0000MP01").outcome).toBe("unsupported");
+
+    for (const key of [
+      "paybill",
+      "tillNumber",
+      "businessNumber",
+      "fuliza",
+      "fulizaAmount",
+      "isPaybill",
+      "isBuyGoods",
+    ]) {
+      const input = structuredClone(VALID_INPUT);
+      (input.transactions[0] as Record<string, unknown>)[key] = "123456";
+      const res = interpretMpesa(input, "QA0000MP01");
+      expect(res.outcome).toBe("unsupported");
+      if (res.outcome === "unsupported") {
+        expect(res.reason).toContain("Lipa na M-Pesa");
+      }
+    }
   });
 
   it("rejects pending, processing, failed, cancelled, reversed, or unknown status", () => {

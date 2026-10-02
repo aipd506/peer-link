@@ -70,6 +70,21 @@ export function interpretMpesa(input, transactionId) {
     };
   }
 
+  if (
+    row.paybill ||
+    row.tillNumber ||
+    row.businessNumber ||
+    row.fuliza ||
+    row.fulizaAmount ||
+    row.isPaybill ||
+    row.isBuyGoods
+  ) {
+    return {
+      outcome: "unsupported",
+      reason: "Lipa na M-Pesa (Buy Goods / Paybill) and Fuliza transactions are excluded",
+    };
+  }
+
   if (row.direction !== "debit" && row.direction !== "outgoing") {
     return { outcome: "unsupported", reason: "Only outgoing debit transfers are supported" };
   }
