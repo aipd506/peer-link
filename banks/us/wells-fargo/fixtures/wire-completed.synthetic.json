@@ -1,0 +1,43 @@
+{
+  "provenance": "synthetic",
+  "description": "Invented account, routing, counterparty and transaction identifiers representing a completed outgoing domestic wire transfer on Wells Fargo web activity. Not a real banking record.",
+  "input": {
+    "account": {
+      "id": "wf-synthetic-acct-2002",
+      "name": "Synthetic Business Checking",
+      "currency": "USD"
+    },
+    "transactions": [
+      {
+        "id": "wf-synthetic-wire-9901",
+        "type": "outgoingDomesticWire",
+        "direction": "debit",
+        "amount": "1500.00",
+        "currency": "USD",
+        "status": "completed",
+        "postedAt": "2026-02-21T14:30:00.000Z",
+        "counterparty": {
+          "name": "Synthetic Wire Beneficiary",
+          "routingNumber": "000000000",
+          "accountNumber": "000000000002"
+        },
+        "memo": "Property escrow wire"
+      }
+    ]
+  },
+  "transactionId": "wf-synthetic-wire-9901",
+  "expected": {
+    "outcome": "supported",
+    "payerId": "wf-synthetic-acct-2002",
+    "payerScheme": "wells-fargo-account-id",
+    "payeeId": "000000000:000000000002",
+    "payeeScheme": "us-routing-account",
+    "amountMinor": "150000",
+    "currency": "USD",
+    "currencyExponent": 2,
+    "direction": "outgoing",
+    "status": "completed",
+    "timestamp": "2026-02-21T14:30:00.000Z",
+    "timestampMeaning": "postedAt"
+  }
+}
