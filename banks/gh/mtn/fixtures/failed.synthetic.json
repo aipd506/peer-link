@@ -1,0 +1,30 @@
+{
+  "provenance": "synthetic",
+  "description": "MTN MoMo Ghana transfer record with failed execution status.",
+  "input": {
+    "account": {
+      "phone": "0240000001"
+    },
+    "transactions": [
+      {
+        "id": "mtn-gh-tx-003",
+        "type": "domesticTransfer",
+        "direction": "debit",
+        "status": "FAILED",
+        "amount": "25.00",
+        "currency": "GHS",
+        "bookedAt": "2026-10-02T11:15:00Z",
+        "counterparty": {
+          "phone": "0240000002",
+          "name": "Synthetic Recipient"
+        },
+        "memo": "Failed transfer"
+      }
+    ]
+  },
+  "transactionId": "mtn-gh-tx-003",
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction is not bank-reported completed"
+  }
+}

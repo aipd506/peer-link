@@ -1,0 +1,37 @@
+{
+  "provenance": "synthetic",
+  "description": "Completed outgoing MTN MoMo Ghana transfer with synthetic Ghana mobile numbers and standard GHS decimal amount.",
+  "input": {
+    "account": {
+      "phone": "0240000001"
+    },
+    "transactions": [
+      {
+        "id": "mtn-gh-tx-001",
+        "type": "domesticTransfer",
+        "direction": "debit",
+        "status": "COMPLETED",
+        "amount": "150.50",
+        "currency": "GHS",
+        "bookedAt": "2026-10-02T10:30:00Z",
+        "counterparty": {
+          "phone": "0240000002",
+          "name": "Synthetic Recipient"
+        },
+        "memo": "Transfer for groceries"
+      }
+    ]
+  },
+  "transactionId": "mtn-gh-tx-001",
+  "expected": {
+    "outcome": "supported",
+    "payerId": "0240000001",
+    "payeeId": "0240000002",
+    "amountMinor": "15050",
+    "currency": "GHS",
+    "currencyExponent": 2,
+    "direction": "outgoing",
+    "status": "COMPLETED",
+    "timestamp": "2026-10-02T10:30:00Z"
+  }
+}

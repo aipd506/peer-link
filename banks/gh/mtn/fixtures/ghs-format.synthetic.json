@@ -1,0 +1,37 @@
+{
+  "provenance": "synthetic",
+  "description": "Completed outgoing MTN MoMo Ghana transfer with GH₵ currency prefix and comma thousand separators.",
+  "input": {
+    "account": {
+      "phone": "233240000001"
+    },
+    "transactions": [
+      {
+        "id": "mtn-gh-tx-004",
+        "type": "momoTransfer",
+        "direction": "debit",
+        "status": "SUCCESSFUL",
+        "amount": "GH₵ 1,250.75",
+        "currency": "GHS",
+        "bookedAt": "2026-10-02T12:00:00Z",
+        "payee": {
+          "phone": "233550000002",
+          "name": "Synthetic Recipient"
+        },
+        "memo": "Payment for supplies"
+      }
+    ]
+  },
+  "transactionId": "mtn-gh-tx-004",
+  "expected": {
+    "outcome": "supported",
+    "payerId": "233240000001",
+    "payeeId": "233550000002",
+    "amountMinor": "125075",
+    "currency": "GHS",
+    "currencyExponent": 2,
+    "direction": "outgoing",
+    "status": "SUCCESSFUL",
+    "timestamp": "2026-10-02T12:00:00Z"
+  }
+}

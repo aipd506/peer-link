@@ -1,0 +1,30 @@
+{
+  "provenance": "synthetic",
+  "description": "MTN MoMo Ghana transfer record while still in pending bank execution state.",
+  "input": {
+    "account": {
+      "phone": "0240000001"
+    },
+    "transactions": [
+      {
+        "id": "mtn-gh-tx-002",
+        "type": "domesticTransfer",
+        "direction": "debit",
+        "status": "PENDING",
+        "amount": "75.00",
+        "currency": "GHS",
+        "bookedAt": "2026-10-02T11:00:00Z",
+        "counterparty": {
+          "phone": "0240000002",
+          "name": "Synthetic Recipient"
+        },
+        "memo": "Pending transfer"
+      }
+    ]
+  },
+  "transactionId": "mtn-gh-tx-002",
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction is still pending bank execution"
+  }
+}
