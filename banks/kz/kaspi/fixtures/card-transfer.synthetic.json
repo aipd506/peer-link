@@ -1,0 +1,44 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic completed outgoing KZT Kaspi card-to-card transfer record from Kaspi receipt",
+  "input": {
+    "account": {
+      "id": "+77000000001",
+      "name": "Synthetic Payer"
+    },
+    "transactions": [
+      {
+        "id": "KZ2026100200003",
+        "type": "domesticTransfer",
+        "paymentType": "CardTransfer",
+        "direction": "debit",
+        "status": "SUCCESS",
+        "amount": "12500.50",
+        "currency": "KZT",
+        "bookedAt": "2026-10-02T16:30:00Z",
+        "payer": {
+          "cardNumber": "4405630000001111"
+        },
+        "payee": {
+          "cardNumber": "4405630000002222",
+          "name": "Synthetic Payee"
+        }
+      }
+    ]
+  },
+  "transactionId": "KZ2026100200003",
+  "expected": {
+    "outcome": "supported",
+    "payerId": "4405630000001111",
+    "payerScheme": "pan",
+    "payeeId": "4405630000002222",
+    "payeeScheme": "pan",
+    "amountMinor": "1250050",
+    "currency": "KZT",
+    "currencyExponent": 2,
+    "direction": "outgoing",
+    "status": "SUCCESS",
+    "timestamp": "2026-10-02T16:30:00Z",
+    "timestampMeaning": "completedAt"
+  }
+}

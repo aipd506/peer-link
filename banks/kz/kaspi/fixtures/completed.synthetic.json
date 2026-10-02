@@ -1,0 +1,44 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic completed outgoing KZT Kaspi phone transfer record from Kaspi receipt",
+  "input": {
+    "account": {
+      "id": "+77000000001",
+      "name": "Synthetic Payer"
+    },
+    "transactions": [
+      {
+        "id": "KZ2026100200001",
+        "type": "domesticTransfer",
+        "paymentType": "KaspiTransfer",
+        "direction": "debit",
+        "status": "COMPLETED",
+        "amount": "25000.00",
+        "currency": "KZT",
+        "bookedAt": "2026-10-02T16:00:00Z",
+        "payer": {
+          "phone": "+77000000001"
+        },
+        "payee": {
+          "phone": "+77000000002",
+          "name": "Synthetic Payee Arman K."
+        }
+      }
+    ]
+  },
+  "transactionId": "KZ2026100200001",
+  "expected": {
+    "outcome": "supported",
+    "payerId": "+77000000001",
+    "payerScheme": "kz-msisdn",
+    "payeeId": "+77000000002",
+    "payeeScheme": "kz-msisdn",
+    "amountMinor": "2500000",
+    "currency": "KZT",
+    "currencyExponent": 2,
+    "direction": "outgoing",
+    "status": "COMPLETED",
+    "timestamp": "2026-10-02T16:00:00Z",
+    "timestampMeaning": "completedAt"
+  }
+}
