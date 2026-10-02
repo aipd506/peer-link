@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1",
+  "provider": "id/bca",
+  "adapterRevision": "d01788283a7da56f43f62473a82eea7fb47dd681",
+  "harnessRevision": "d01788283a7da56f43f62473a82eea7fb47dd681",
+  "testedAt": "2026-10-02T20:15:00Z",
+  "reporter": "aipd506",
+  "surface": "mobile-app-receipt",
+  "capability": "outgoing-domestic-idr-transfer",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": ["fixtures/completed.synthetic.json", "fixtures/pending.synthetic.json"],
+  "limitations": [
+    "One contributor account; no independent multi-party reproduction.",
+    "Only completed outgoing domestic IDR transfers validated; QRIS, bill payments, and incoming transfers stay unsupported.",
+    "Source authenticity, legal person identity, recipient credit and irreversible settlement are not proven.",
+    "Raw receipt payload remained in local browser agent evaluation memory and is not published."
+  ],
+  "summary": "Account-owner-authorized session inspected myBCA / KlikBCA transaction records and executed the repository transformer in memory against synthetic and live-shape transfer records. Completed status, IDR amount in minor units, payer BCA account ID, counterparty account ID, and UTC timestamps matched the official receipt exactly. Pending transfers and unsupported types abstain cleanly without throwing."
+}
