@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "id": "vn/vietcombank",
+  "name": "Vietcombank",
+  "country": "VN",
+  "status": "experimental",
+  "version": "0.1.0",
+  "surface": "vcb-digibank-transaction-detail",
+  "capability": "Interpret outgoing domestic VND bank account transfers as sender-bank-reported debits",
+  "entrypoint": "interpretVietcombank",
+  "maintainers": ["aipd506"],
+  "currencies": ["VND"],
+  "unsupported": [
+    "bill-payments",
+    "mobile-topup",
+    "qr-merchant-payments",
+    "international-remittance",
+    "incoming-credits",
+    "fixed-deposit",
+    "loan-disbursements",
+    "cryptographic-source-authentication"
+  ],
+  "fixtureProvenance": "synthetic",
+  "logo": "/logos/vietcombank.png"
+}

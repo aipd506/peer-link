@@ -1,0 +1,43 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic completed outgoing intra-bank VND transfer record from VCB Digibank receipt",
+  "input": {
+    "account": {
+      "accountNumber": "000000000001",
+      "name": "Synthetic Payer"
+    },
+    "transactions": [
+      {
+        "id": "vcb-tx-20261002-001",
+        "transferType": "intra_bank",
+        "direction": "debit",
+        "status": "SUCCESS",
+        "amount": 2500000,
+        "currency": "VND",
+        "completedAt": "2026-10-02T16:00:00Z",
+        "senderAccount": "000000000001",
+        "senderName": "Synthetic Payer",
+        "recipient": {
+          "accountNumber": "000000000002",
+          "name": "Synthetic Payee",
+          "bank": "Vietcombank"
+        }
+      }
+    ]
+  },
+  "transactionId": "vcb-tx-20261002-001",
+  "expected": {
+    "outcome": "supported",
+    "payerId": "000000000001",
+    "payerScheme": "vn-vcb-account",
+    "payeeId": "000000000002",
+    "payeeScheme": "vn-bank-account",
+    "amountMinor": "2500000",
+    "currency": "VND",
+    "currencyExponent": 0,
+    "direction": "outgoing",
+    "status": "SUCCESS",
+    "timestamp": "2026-10-02T16:00:00Z",
+    "timestampMeaning": "completedAt"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic completed outgoing NAPAS 247 interbank VND transfer record from VCB Digibank receipt",
+  "input": {
+    "account": {
+      "accountNumber": "000000000001",
+      "name": "Synthetic Payer"
+    },
+    "transactions": [
+      {
+        "id": "vcb-tx-20261002-003",
+        "transferType": "napas_247",
+        "direction": "debit",
+        "status": "THANH_CONG",
+        "amount": "1000000",
+        "currency": "VND",
+        "completedAt": "2026-10-02T16:30:00Z",
+        "senderAccount": "000000000001",
+        "recipient": {
+          "accountNumber": "000000000003",
+          "name": "Synthetic Interbank Payee",
+          "bank": "Techcombank"
+        }
+      }
+    ]
+  },
+  "transactionId": "vcb-tx-20261002-003",
+  "expected": {
+    "outcome": "supported",
+    "payerId": "000000000001",
+    "payerScheme": "vn-vcb-account",
+    "payeeId": "000000000003",
+    "payeeScheme": "vn-bank-account",
+    "amountMinor": "1000000",
+    "currency": "VND",
+    "currencyExponent": 0,
+    "direction": "outgoing",
+    "status": "THANH_CONG",
+    "timestamp": "2026-10-02T16:30:00Z",
+    "timestampMeaning": "completedAt"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic pending outgoing domestic VND transfer record from VCB Digibank receipt",
+  "input": {
+    "account": {
+      "accountNumber": "000000000001",
+      "name": "Synthetic Payer"
+    },
+    "transactions": [
+      {
+        "id": "vcb-tx-20261002-002",
+        "transferType": "intra_bank",
+        "direction": "debit",
+        "status": "PENDING",
+        "amount": 500000,
+        "currency": "VND",
+        "completedAt": "2026-10-02T16:15:00Z",
+        "senderAccount": "000000000001",
+        "recipient": {
+          "accountNumber": "000000000002",
+          "name": "Synthetic Payee"
+        }
+      }
+    ]
+  },
+  "transactionId": "vcb-tx-20261002-002",
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction is still pending execution"
+  }
+}
