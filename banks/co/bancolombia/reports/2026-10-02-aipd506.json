@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1",
+  "provider": "co/bancolombia",
+  "adapterRevision": "5ed1f2f7f59d3bcd90cba3713c9f630e1827cc2a",
+  "harnessRevision": "5ed1f2f7f59d3bcd90cba3713c9f630e1827cc2a",
+  "testedAt": "2026-10-02T21:30:00Z",
+  "reporter": "aipd506",
+  "surface": "web-banking-receipt",
+  "capability": "outgoing-domestic-cop-transfer",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/formatted-amount.synthetic.json",
+    "fixtures/pending.synthetic.json"
+  ],
+  "limitations": [
+    "One contributor account evaluated without independent multi party reproduction.",
+    "Only completed outgoing domestic COP transfers between Bancolombia accounts validated.",
+    "Transfiya fast payments, interbank ACH, and international wires stay unsupported.",
+    "Source authenticity, legal person identity, recipient credit, and irreversible settlement are not proven.",
+    "Raw transaction payload remained in local browser agent evaluation memory and is not published."
+  ],
+  "summary": "Account owner authorized session inspected Bancolombia web banking movement records and executed repository transformer in memory against synthetic and live shape transfer records. Completed status, COP amount in integer whole pesos, sender Bancolombia account, counterparty Bancolombia account, and UTC timestamps matched the official movement payload exactly. Pending transfers and unsupported payment types abstain cleanly without throwing."
+}
