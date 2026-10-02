@@ -118,12 +118,21 @@ describe("MTN MoMo Ghana payment evidence", () => {
     },
   );
 
-  it.each(["0", "0.00", "-10.00", "1.234", "1e3", "abc", null, undefined, "9999999999999999"])(
-    "rejects invalid amount %j",
-    (amount) => {
-      expect(outcome(change({ amount }))).toBe("insufficient_evidence");
-    },
-  );
+  it.each([
+    "0",
+    "0.00",
+    "-10.00",
+    "1.234",
+    "1,234",
+    "1,2,3",
+    "1e3",
+    "abc",
+    null,
+    undefined,
+    "9999999999999999",
+  ])("rejects invalid amount %j", (amount) => {
+    expect(outcome(change({ amount }))).toBe("insufficient_evidence");
+  });
 
   it.each([-10, 0, Infinity, NaN])("rejects invalid numeric amount %j", (amount) => {
     expect(outcome(change({ amount }))).toBe("insufficient_evidence");
@@ -141,6 +150,7 @@ describe("MTN MoMo Ghana payment evidence", () => {
     ["1", "100"],
     ["0.05", "5"],
     ["150.5", "15050"],
+    ["150,50", "15050"],
     ["GH₵ 250.00", "25000"],
     ["GHS 1,250.75", "125075"],
     ["1.250,75", "125075"],
@@ -213,6 +223,18 @@ describe("MTN MoMo Ghana payment evidence", () => {
     (input3.transactions as Record<string, unknown>[])[0].counterparty = null;
     (input3.transactions as Record<string, unknown>[])[0].payee = { id: "0550000002" };
     expect(outcome(input3)).toBe("supported");
+
+    const input4 = structuredClone(fixture.input) as unknown as Record<string, unknown>;
+    input4.account = null;
+    (input4.transactions as Record<string, unknown>[])[0].payer = { phone: "+233 24 000 0001" };
+    (input4.transactions as Record<string, unknown>[])[0].counterparty = null;
+    (input4.transactions as Record<string, unknown>[])[0].payee = { phone: "+233-55-000-0002" };
+    const res4 = run(input4);
+    expect(res4.outcome).toBe("supported");
+    if (res4.outcome === "supported") {
+      expect(res4.payment.payer.id).toBe("233240000001");
+      expect(res4.payment.payee.id).toBe("233550000002");
+    }
   });
 
   it("ignores untrusted memo text and recipient display names", () => {

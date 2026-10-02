@@ -104,6 +104,14 @@ export function interpretMtn(input, transactionId) {
       whole = rawAmount.slice(0, dotIdx).replaceAll(",", "");
       fraction = rawAmount.slice(dotIdx + 1);
     }
+  } else if (rawAmount.includes(",")) {
+    const parts = rawAmount.split(",");
+    if (parts.length === 2 && parts[1].length <= EXPONENT) {
+      whole = parts[0];
+      fraction = parts[1];
+    } else {
+      return fail("Amount must be a decimal string within currency precision");
+    }
   } else if (rawAmount.includes(".")) {
     const parts = rawAmount.split(".");
     if (parts.length === 2 && parts[1].length <= EXPONENT) {
@@ -152,7 +160,7 @@ export function interpretMtn(input, transactionId) {
   if (!text(rawPayerId) || /[*•?]/.test(rawPayerId)) {
     return fail("Unmasked payer mobile identifier is required");
   }
-  const payerClean = rawPayerId.replace(/[\s-]/g, "");
+  const payerClean = rawPayerId.replace(/[\s-]/g, "").replace(/^\+/, "");
   const isPayerMsisdn = /^(?:0[235]\d{8}|233[235]\d{8})$/.test(payerClean);
   if (!isPayerMsisdn) {
     return fail("Valid Ghana MSISDN mobile identifier is required for payer");
@@ -172,7 +180,7 @@ export function interpretMtn(input, transactionId) {
   if (!text(rawPayeeId) || /[*•?]/.test(rawPayeeId)) {
     return fail("Unmasked counterparty mobile identifier is required");
   }
-  const payeeClean = rawPayeeId.replace(/[\s-]/g, "");
+  const payeeClean = rawPayeeId.replace(/[\s-]/g, "").replace(/^\+/, "");
   const isPayeeMsisdn = /^(?:0[235]\d{8}|233[235]\d{8})$/.test(payeeClean);
   if (!isPayeeMsisdn) {
     return fail("Valid Ghana MSISDN mobile identifier is required for payee");
