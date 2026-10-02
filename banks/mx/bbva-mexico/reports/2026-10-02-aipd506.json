@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "provider": "mx/bbva-mexico",
+  "adapterRevision": "469bb2df9c189b1bd1de15dcc06ef94bd195b362",
+  "harnessRevision": "469bb2df9c189b1bd1de15dcc06ef94bd195b362",
+  "testedAt": "2026-10-02T22:30:00Z",
+  "reporter": "aipd506",
+  "surface": "app-receipt-detail",
+  "capability": "outgoing-mxn-spei-transfer",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/pending.synthetic.json",
+    "fixtures/unsupported-type.synthetic.json"
+  ],
+  "limitations": [
+    "One contributor account; no independent multi-party reproduction.",
+    "Only completed outgoing MXN SPEI transfers validated; internal transfers without tracking keys, card payments, cash withdrawals, and incoming transfers stay unsupported.",
+    "Source authenticity, legal person identity, recipient credit and irreversible settlement are not proven.",
+    "Raw receipt payload remained in local mobile session inspection memory and is not published."
+  ],
+  "summary": "Account owner authorized session inspected BBVA Mexico transfer receipt records and executed the repository transformer in memory against synthetic and live shape transfer records. Completed status, MXN amount in centavos, payer CLABE identifier, recipient CLABE identifier, SPEI clave de rastreo tracking key, and UTC timestamps matched the official BBVA Mexico receipt details exactly. Pending transfers and unsupported types abstain cleanly without throwing."
+}
