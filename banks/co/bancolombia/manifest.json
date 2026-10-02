@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "id": "co/bancolombia",
+  "name": "Bancolombia",
+  "country": "CO",
+  "status": "experimental",
+  "version": "0.1.0",
+  "surface": "web-banking-receipt",
+  "capability": "Interpret outgoing domestic COP transfers as sender-bank-reported debits",
+  "entrypoint": "interpretBancolombia",
+  "maintainers": ["aipd506"],
+  "currencies": ["COP"],
+  "unsupported": [
+    "transfiya-fast-payments",
+    "international-wire-transfers",
+    "qr-code-merchant-payments",
+    "direct-debits",
+    "card-payments",
+    "incoming-credits",
+    "recipient-credit-confirmation",
+    "cryptographic-source-authentication"
+  ],
+  "fixtureProvenance": "synthetic",
+  "logo": "/logos/bancolombia.png"
+}

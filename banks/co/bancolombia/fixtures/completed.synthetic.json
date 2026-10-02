@@ -1,0 +1,42 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic completed outgoing domestic Bancolombia transfer between checking accounts with invented account numbers containing runs of zeros.",
+  "transactionId": "bancolombia-tx-0001",
+  "input": {
+    "account": {
+      "accountNumber": "24000000001",
+      "holder": "Example Account Holder"
+    },
+    "transactions": [
+      {
+        "id": "bancolombia-tx-0001",
+        "reference": "bancolombia-tx-0001",
+        "type": "bancolombiaTransfer",
+        "direction": "debit",
+        "status": "EXITOSA",
+        "amount": "50000",
+        "currency": "COP",
+        "bookedAt": "2026-10-02T15:30:00Z",
+        "payer": {
+          "accountNumber": "24000000001",
+          "name": "Synthetic Payer"
+        },
+        "payee": {
+          "accountNumber": "53000000002",
+          "name": "Synthetic Beneficiary"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "outcome": "supported",
+    "payerId": "24000000001",
+    "payeeId": "53000000002",
+    "amountMinor": "50000",
+    "currency": "COP",
+    "currencyExponent": 0,
+    "direction": "outgoing",
+    "status": "EXITOSA",
+    "timestamp": "2026-10-02T15:30:00Z"
+  }
+}

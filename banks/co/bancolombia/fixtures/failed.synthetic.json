@@ -1,0 +1,35 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic failed Bancolombia transfer rejected by the banking core.",
+  "transactionId": "bancolombia-tx-0003",
+  "input": {
+    "account": {
+      "accountNumber": "24000000001",
+      "holder": "Example Account Holder"
+    },
+    "transactions": [
+      {
+        "id": "bancolombia-tx-0003",
+        "reference": "bancolombia-tx-0003",
+        "type": "bancolombiaTransfer",
+        "direction": "debit",
+        "status": "RECHAZADA",
+        "amount": "100000",
+        "currency": "COP",
+        "bookedAt": "2026-10-02T16:15:00Z",
+        "payer": {
+          "accountNumber": "24000000001",
+          "name": "Synthetic Payer"
+        },
+        "payee": {
+          "accountNumber": "53000000002",
+          "name": "Synthetic Beneficiary"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction is not bank-reported completed"
+  }
+}
