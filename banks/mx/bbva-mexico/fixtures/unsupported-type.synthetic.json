@@ -1,0 +1,34 @@
+{
+  "provenance": "synthetic",
+  "description": "Invented transaction with unsupported card payment type.",
+  "input": {
+    "account": {
+      "id": "000000001234",
+      "clabe": "012180000000000123"
+    },
+    "transactions": [
+      {
+        "id": "spei-tx-00000001",
+        "type": "cardPayment",
+        "direction": "debit",
+        "status": "EXITOSO",
+        "amount": "2500.50",
+        "currency": "MXN",
+        "claveRastreo": "MBAN01002601150000000001",
+        "timestamp": "2026-01-15T12:00:00Z",
+        "payer": {
+          "clabe": "012180000000000123"
+        },
+        "payee": {
+          "clabe": "002180000000000456",
+          "name": "Synthetic Payee"
+        }
+      }
+    ]
+  },
+  "transactionId": "spei-tx-00000001",
+  "expected": {
+    "outcome": "unsupported",
+    "reason": "Only outgoing MXN SPEI transfers are supported"
+  }
+}

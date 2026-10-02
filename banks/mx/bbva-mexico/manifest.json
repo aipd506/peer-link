@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1",
+  "id": "mx/bbva-mexico",
+  "name": "BBVA Mexico",
+  "country": "MX",
+  "status": "experimental",
+  "version": "0.1.0",
+  "surface": "app-receipt-detail",
+  "capability": "Interpret outgoing MXN SPEI transfers with clave de rastreo as sender reported debits",
+  "entrypoint": "interpretBbvaMexico",
+  "maintainers": ["aipd506"],
+  "currencies": ["MXN"],
+  "unsupported": [
+    "incoming received transfers",
+    "internal BBVA account transfers without clave de rastreo",
+    "cash withdrawals and ATM deposits",
+    "credit card payments",
+    "services and utility payments",
+    "cryptographic source authentication"
+  ],
+  "fixtureProvenance": "synthetic",
+  "logo": "/logos/16.png"
+}

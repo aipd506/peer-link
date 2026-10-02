@@ -1,0 +1,44 @@
+{
+  "provenance": "synthetic",
+  "description": "Invented completed outgoing MXN SPEI transfer with valid clave de rastreo and synthetic CLABE identifiers.",
+  "input": {
+    "account": {
+      "id": "000000001234",
+      "clabe": "012180000000000123"
+    },
+    "transactions": [
+      {
+        "id": "spei-tx-00000001",
+        "type": "speiTransfer",
+        "direction": "debit",
+        "status": "EXITOSO",
+        "amount": "2500.50",
+        "currency": "MXN",
+        "claveRastreo": "MBAN01002601150000000001",
+        "timestamp": "2026-01-15T12:00:00Z",
+        "payer": {
+          "clabe": "012180000000000123"
+        },
+        "payee": {
+          "clabe": "002180000000000456",
+          "name": "Synthetic Payee"
+        }
+      }
+    ]
+  },
+  "transactionId": "spei-tx-00000001",
+  "expected": {
+    "outcome": "supported",
+    "payerId": "012180000000000123",
+    "payeeId": "002180000000000456",
+    "amountMinor": "250050",
+    "currency": "MXN",
+    "status": "EXITOSO",
+    "timestamp": "2026-01-15T12:00:00Z",
+    "payerScheme": "mx-clabe",
+    "payeeScheme": "mx-clabe",
+    "currencyExponent": 2,
+    "direction": "outgoing",
+    "timestampMeaning": "operationTime"
+  }
+}
