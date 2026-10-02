@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "provider": "ua/monobank",
+  "adapterRevision": "dc11a3315aed1b02e327d8dec64fd0d020a5f4d3",
+  "harnessRevision": "dc11a3315aed1b02e327d8dec64fd0d020a5f4d3",
+  "testedAt": "2026-10-02T22:30:00Z",
+  "reporter": "aipd506",
+  "surface": "mobile-app-statement",
+  "capability": "outgoing-domestic-uah-transfer",
+  "outcome": "pass",
+  "evidenceClass": "contributor-live",
+  "fixtureRefs": [
+    "fixtures/card-transfer.synthetic.json",
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/pending.synthetic.json"
+  ],
+  "limitations": [
+    "Single contributor verification without independent third party multi session reproduction.",
+    "Only completed outgoing domestic UAH IBAN and card transfers are verified; merchant transactions and utilities abstain.",
+    "Cryptographic origin authenticity and recipient credit finality are not attested by this parser.",
+    "Statement payload was inspected in local contributor memory and omitted from repository history."
+  ],
+  "summary": "Account owner session verified outgoing domestic Monobank UAH IBAN and card transfers in local memory. Parsing correctly extracted transaction identifier, exact minor units in kopecks, payer IBAN, counterparty IBAN and card number, execution status, and UTC timestamp. Pending and failed records abstain cleanly without throwing."
+}
