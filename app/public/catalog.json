@@ -3,6 +3,49 @@
   "providers": [
     {
       "schemaVersion": "1",
+      "id": "us/chase",
+      "name": "Chase",
+      "country": "US",
+      "status": "experimental",
+      "version": "0.1.0",
+      "surface": "web-activity-detail",
+      "capability": "Interpret outgoing domestic USD ACH transfers as sender-bank-reported debits",
+      "maintainers": [
+        "aipd506"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "unsupported": [
+        "Zelle transfers",
+        "wire transfers",
+        "card transactions",
+        "bill payments",
+        "incoming ACH credits",
+        "recipient-credit confirmation",
+        "cryptographic source authentication"
+      ],
+      "fixtureProvenance": "synthetic",
+      "logo": "/logos/chase.jpg",
+      "reportCount": 1,
+      "evidence": [
+        {
+          "scope": "8126d648812e071f89e02d94fbb21e797d8e6c65:8126d648812e071f89e02d94fbb21e797d8e6c65:web-activity-detail:outgoing-domestic-usd-ach",
+          "reports": [
+            {
+              "reporter": "aipd506",
+              "outcome": "pass",
+              "evidenceClass": "contributor-live",
+              "testedAt": "2026-10-02T21:15:00Z"
+            }
+          ],
+          "distinctReportingHandles": 1
+        }
+      ],
+      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/us/chase"
+    },
+    {
+      "schemaVersion": "1",
       "id": "us/mercury",
       "name": "Mercury",
       "country": "US",
