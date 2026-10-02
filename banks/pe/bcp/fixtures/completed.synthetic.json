@@ -1,0 +1,42 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic completed outgoing domestic transfer between BCP accounts with 14-digit account numbers containing runs of zeros.",
+  "transactionId": "bcp-pe-tx-0001",
+  "input": {
+    "account": {
+      "accountNumber": "19100000000001",
+      "holder": "Example Account Holder"
+    },
+    "transactions": [
+      {
+        "id": "bcp-pe-tx-0001",
+        "operationNumber": "bcp-pe-tx-0001",
+        "type": "bcpTransfer",
+        "direction": "debit",
+        "status": "REALIZADA",
+        "amount": "125.50",
+        "currency": "PEN",
+        "bookedAt": "2026-10-02T16:00:00Z",
+        "payer": {
+          "accountNumber": "19100000000001",
+          "name": "Synthetic Payer"
+        },
+        "payee": {
+          "accountNumber": "19300000000002",
+          "name": "Synthetic Beneficiary"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "outcome": "supported",
+    "payerId": "19100000000001",
+    "payeeId": "19300000000002",
+    "amountMinor": "12550",
+    "currency": "PEN",
+    "currencyExponent": 2,
+    "direction": "outgoing",
+    "status": "REALIZADA",
+    "timestamp": "2026-10-02T16:00:00Z"
+  }
+}

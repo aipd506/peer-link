@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1",
+  "id": "pe/bcp",
+  "name": "Banco de Credito del Peru",
+  "country": "PE",
+  "status": "experimental",
+  "version": "0.1.0",
+  "surface": "web-banking-receipt",
+  "capability": "Interpret outgoing domestic PEN transfers as sender-bank-reported debits",
+  "entrypoint": "interpretBcp",
+  "maintainers": ["aipd506"],
+  "currencies": ["PEN"],
+  "unsupported": [
+    "yape-p2p-payments",
+    "international-wire-transfers",
+    "bill-payments",
+    "card-payments",
+    "incoming-credits",
+    "recipient-credit-confirmation",
+    "cryptographic-source-authentication"
+  ],
+  "fixtureProvenance": "synthetic",
+  "logo": "/logos/bcp.png"
+}

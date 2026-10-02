@@ -1,0 +1,35 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic pending BCP transfer awaiting execution.",
+  "transactionId": "bcp-pe-tx-0003",
+  "input": {
+    "account": {
+      "accountNumber": "19100000000001",
+      "holder": "Example Account Holder"
+    },
+    "transactions": [
+      {
+        "id": "bcp-pe-tx-0003",
+        "operationNumber": "bcp-pe-tx-0003",
+        "type": "bcpTransfer",
+        "direction": "debit",
+        "status": "EN_PROCESO",
+        "amount": "80.00",
+        "currency": "PEN",
+        "bookedAt": "2026-10-02T16:45:00Z",
+        "payer": {
+          "accountNumber": "19100000000001",
+          "name": "Synthetic Payer"
+        },
+        "payee": {
+          "accountNumber": "19300000000002",
+          "name": "Synthetic Beneficiary"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction is still pending bank execution"
+  }
+}

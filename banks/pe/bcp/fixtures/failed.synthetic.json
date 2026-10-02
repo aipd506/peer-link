@@ -1,0 +1,35 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic failed BCP transfer rejected by core banking.",
+  "transactionId": "bcp-pe-tx-0004",
+  "input": {
+    "account": {
+      "accountNumber": "19100000000001",
+      "holder": "Example Account Holder"
+    },
+    "transactions": [
+      {
+        "id": "bcp-pe-tx-0004",
+        "operationNumber": "bcp-pe-tx-0004",
+        "type": "bcpTransfer",
+        "direction": "debit",
+        "status": "RECHAZADA",
+        "amount": "95.00",
+        "currency": "PEN",
+        "bookedAt": "2026-10-02T17:00:00Z",
+        "payer": {
+          "accountNumber": "19100000000001",
+          "name": "Synthetic Payer"
+        },
+        "payee": {
+          "accountNumber": "19300000000002",
+          "name": "Synthetic Beneficiary"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction is not bank-reported completed"
+  }
+}

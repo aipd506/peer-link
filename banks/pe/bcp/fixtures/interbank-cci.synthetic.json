@@ -1,0 +1,42 @@
+{
+  "provenance": "synthetic",
+  "description": "Synthetic completed outgoing interbank CCI transfer from BCP with 20-digit CCIs containing runs of zeros.",
+  "transactionId": "bcp-pe-tx-0002",
+  "input": {
+    "account": {
+      "cci": "00219100000000000001",
+      "holder": "Example Account Holder"
+    },
+    "transactions": [
+      {
+        "id": "bcp-pe-tx-0002",
+        "operationNumber": "bcp-pe-tx-0002",
+        "type": "interbankTransfer",
+        "direction": "debit",
+        "status": "EXITOSA",
+        "amount": "S/ 250,00",
+        "currency": "PEN",
+        "bookedAt": "2026-10-02T16:30:00Z",
+        "payer": {
+          "cci": "00219100000000000001",
+          "name": "Synthetic Payer"
+        },
+        "payee": {
+          "cci": "00319300000000000002",
+          "name": "Synthetic Beneficiary"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "outcome": "supported",
+    "payerId": "00219100000000000001",
+    "payeeId": "00319300000000000002",
+    "amountMinor": "25000",
+    "currency": "PEN",
+    "currencyExponent": 2,
+    "direction": "outgoing",
+    "status": "EXITOSA",
+    "timestamp": "2026-10-02T16:30:00Z"
+  }
+}
