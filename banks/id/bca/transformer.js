@@ -22,11 +22,28 @@ export function interpretBca(input, transactionId) {
 
   const root = object(input);
   const account = object(root?.account);
-  if (!root || !account || !Array.isArray(root.transactions)) {
+
+  let txList = null;
+  if (Array.isArray(input)) {
+    txList = input;
+  } else if (Array.isArray(root?.transactions)) {
+    txList = root.transactions;
+  } else if (Array.isArray(root?.data)) {
+    txList = root.data;
+  } else if (root?.id === transactionId) {
+    txList = [root];
+  } else {
+    const wrapped = object(root?.receipt) ?? object(root?.data);
+    if (wrapped?.id === transactionId) {
+      txList = [wrapped];
+    }
+  }
+
+  if (!txList) {
     return fail("Expected account and transactions");
   }
 
-  const rows = root.transactions.filter((row) => object(row)?.id === transactionId);
+  const rows = txList.filter((r) => object(r)?.id === transactionId);
   if (rows.length !== 1) {
     return fail("Selected transaction must occur exactly once");
   }
@@ -41,10 +58,16 @@ export function interpretBca(input, transactionId) {
     return { outcome: "unsupported", reason: "Only outgoing debit transfers are supported" };
   }
 
-  if (row.status === "DIPROSES" || row.status === "pending" || row.status === "PENDING") {
+  if (
+    row.status === "DIPROSES" ||
+    row.status === "pending" ||
+    row.status === "PENDING" ||
+    row.status === "IN_PROGRESS"
+  ) {
     return fail("Transaction is still pending bank execution");
   }
-  if (row.status !== "BERHASIL" && row.status !== "SUCCESS" && row.status !== "COMPLETED") {
+  const completedStatuses = ["BERHASIL", "SUCCESS", "COMPLETED"];
+  if (typeof row.status !== "string" || !completedStatuses.includes(row.status)) {
     return fail("Transaction is not bank-reported completed");
   }
 
@@ -52,14 +75,51 @@ export function interpretBca(input, transactionId) {
     return fail("Missing or conflicting currency: only IDR is supported");
   }
 
-  const amountMatch =
-    typeof row.amount === "string" ? /^(0|[1-9]\d{0,14})(?:\.(\d+))?$/.exec(row.amount) : null;
-  const fraction = amountMatch?.[2] ?? "";
-  if (!amountMatch || (fraction.length > 0 && fraction !== "0" && fraction !== "00")) {
+  // Parse amount: support Indonesian formatting (period thousands separator, optional "Rp"/"IDR" prefix, whole units)
+  let rawAmount = "";
+  if (typeof row.amount === "number") {
+    if (!Number.isFinite(row.amount) || row.amount <= 0 || !Number.isInteger(row.amount)) {
+      return fail("Amount must be a whole decimal string within currency precision");
+    }
+    rawAmount = row.amount.toString();
+  } else if (typeof row.amount === "string") {
+    rawAmount = row.amount.trim();
+  } else {
     return fail("Amount must be a whole decimal string within currency precision");
   }
 
-  const minor = BigInt(amountMatch[1]);
+  // Strip currency prefixes: "Rp", "Rp.", "IDR"
+  rawAmount = rawAmount
+    .replace(/^(?:IDR|Rp\.?)\s*/i, "")
+    .replace(/\s*(?:IDR|Rp\.?)$/i, "")
+    .trim();
+
+  // Strip zero fractional cents if present: e.g. ",00", ".00", ",0", ".0"
+  if (/[.,]0{1,2}$/.test(rawAmount)) {
+    rawAmount = rawAmount.replace(/[.,]0{1,2}$/, "");
+  }
+
+  // Handle thousand separators: "500.000" or "1.500.000"
+  let whole = "";
+  if (rawAmount.includes(".")) {
+    const parts = rawAmount.split(".");
+    if (
+      parts.length >= 2 &&
+      parts.every((p, idx) => (idx === 0 ? /^\d{1,3}$/.test(p) : /^\d{3}$/.test(p)))
+    ) {
+      whole = parts.join("");
+    } else {
+      return fail("Amount must be a whole decimal string within currency precision");
+    }
+  } else {
+    whole = rawAmount;
+  }
+
+  if (!/^(0|[1-9]\d{0,14})$/.test(whole)) {
+    return fail("Amount must be a whole decimal string within currency precision");
+  }
+
+  const minor = BigInt(whole);
   if (minor <= 0n) return fail("Amount must be positive");
 
   if (
@@ -77,26 +137,30 @@ export function interpretBca(input, transactionId) {
   }
 
   const payer = object(row.payer) ?? account;
-  const payerId =
-    typeof payer.accountNumber === "string"
+  const rawPayerId =
+    typeof payer?.accountNumber === "string"
       ? payer.accountNumber
-      : typeof payer.id === "string"
+      : typeof payer?.id === "string"
         ? payer.id
         : "";
-  if (!text(payerId) || payerId.includes("*") || payerId.includes("•")) {
+  if (!text(rawPayerId) || /[*•?]/.test(rawPayerId)) {
     return fail("Unmasked payer account identifier is required");
   }
+  const payerId = rawPayerId.replace(/[\s-]/g, "");
+  const isPayerBcaAcc = /^\d{10}$/.test(payerId);
 
   const payee = object(row.payee);
-  const payeeId =
+  const rawPayeeId =
     typeof payee?.accountNumber === "string"
       ? payee.accountNumber
       : typeof payee?.id === "string"
         ? payee.id
         : "";
-  if (!text(payeeId) || payeeId.includes("*") || payeeId.includes("•")) {
+  if (!text(rawPayeeId) || /[*•?]/.test(rawPayeeId)) {
     return fail("Unmasked counterparty account identifier is required");
   }
+  const payeeId = rawPayeeId.replace(/[\s-]/g, "");
+  const isPayeeBcaAcc = /^\d{10}$/.test(payeeId);
 
   return {
     outcome: "supported",
@@ -105,20 +169,20 @@ export function interpretBca(input, transactionId) {
       provider: "id/bca",
       transactionId,
       payer: {
-        id: payerId,
-        scheme: /^\d{10}$/.test(payerId) ? "bca-account-number" : "bca-account-id",
+        id: isPayerBcaAcc ? payerId : rawPayerId.trim(),
+        scheme: isPayerBcaAcc ? "bca-account-number" : "bca-account-id",
         provenance: "account.id",
       },
       payee: {
-        id: payeeId,
-        scheme: /^\d{10}$/.test(payeeId) ? "bca-account-number" : "id-recipient-id",
+        id: isPayeeBcaAcc ? payeeId : rawPayeeId.trim(),
+        scheme: isPayeeBcaAcc ? "bca-account-number" : "id-recipient-id",
         provenance: "transaction.payee",
       },
       amountMinor: minor.toString(),
       currency: CURRENCY,
       currencyExponent: EXPONENT,
       direction: "outgoing",
-      status: "completed",
+      status: row.status,
       timestamp: row.bookedAt,
       timestampMeaning: "bookedAt",
       sourceAuthenticated: false,

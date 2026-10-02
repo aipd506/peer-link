@@ -1,6 +1,6 @@
 {
   "provenance": "synthetic",
-  "description": "Synthetic completed outgoing IDR transfer record from myBCA/KlikBCA receipt",
+  "description": "Synthetic failed outgoing IDR transfer record from myBCA/KlikBCA receipt",
   "input": {
     "account": {
       "id": "0000000001",
@@ -8,14 +8,14 @@
     },
     "transactions": [
       {
-        "id": "BCA2026100200001",
+        "id": "BCA2026100200004",
         "type": "domesticTransfer",
         "paymentType": "BI-FAST",
         "direction": "debit",
-        "status": "BERHASIL",
-        "amount": "500000",
+        "status": "GAGAL",
+        "amount": "250000",
         "currency": "IDR",
-        "bookedAt": "2026-10-02T17:00:00Z",
+        "bookedAt": "2026-10-02T18:30:00Z",
         "payer": {
           "accountNumber": "0000000001",
           "name": "Synthetic Payer"
@@ -25,18 +25,13 @@
           "name": "Synthetic Payee",
           "bank": "Bank Central Asia"
         },
-        "memo": "Synthetic transfer test"
+        "memo": "Synthetic failed transfer"
       }
     ]
   },
-  "transactionId": "BCA2026100200001",
+  "transactionId": "BCA2026100200004",
   "expected": {
-    "outcome": "supported",
-    "amountMinor": "500000",
-    "currency": "IDR",
-    "status": "BERHASIL",
-    "payerId": "0000000001",
-    "payeeId": "0000000002",
-    "timestamp": "2026-10-02T17:00:00Z"
+    "outcome": "insufficient_evidence",
+    "reason": "Transaction is not bank-reported completed"
   }
 }

@@ -1,6 +1,6 @@
 {
   "provenance": "synthetic",
-  "description": "Synthetic completed outgoing IDR transfer record from myBCA/KlikBCA receipt",
+  "description": "Synthetic completed BCA transfer with Indonesian currency formatting and formatted account numbers",
   "input": {
     "account": {
       "id": "0000000001",
@@ -8,35 +8,35 @@
     },
     "transactions": [
       {
-        "id": "BCA2026100200001",
+        "id": "BCA2026100200003",
         "type": "domesticTransfer",
-        "paymentType": "BI-FAST",
+        "paymentType": "BCA-Transfer",
         "direction": "debit",
         "status": "BERHASIL",
-        "amount": "500000",
+        "amount": "Rp 1.000.000",
         "currency": "IDR",
-        "bookedAt": "2026-10-02T17:00:00Z",
+        "bookedAt": "2026-10-02T18:00:00Z",
         "payer": {
-          "accountNumber": "0000000001",
+          "accountNumber": "000 000 0001",
           "name": "Synthetic Payer"
         },
         "payee": {
-          "accountNumber": "0000000002",
+          "accountNumber": "000 000 0002",
           "name": "Synthetic Payee",
           "bank": "Bank Central Asia"
         },
-        "memo": "Synthetic transfer test"
+        "memo": "Pembayaran tagihan"
       }
     ]
   },
-  "transactionId": "BCA2026100200001",
+  "transactionId": "BCA2026100200003",
   "expected": {
     "outcome": "supported",
-    "amountMinor": "500000",
+    "amountMinor": "1000000",
     "currency": "IDR",
     "status": "BERHASIL",
     "payerId": "0000000001",
     "payeeId": "0000000002",
-    "timestamp": "2026-10-02T17:00:00Z"
+    "timestamp": "2026-10-02T18:00:00Z"
   }
 }

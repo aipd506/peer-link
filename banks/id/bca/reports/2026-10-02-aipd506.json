@@ -9,7 +9,12 @@
   "capability": "outgoing-domestic-idr-transfer",
   "outcome": "pass",
   "evidenceClass": "contributor-live",
-  "fixtureRefs": ["fixtures/completed.synthetic.json", "fixtures/pending.synthetic.json"],
+  "fixtureRefs": [
+    "fixtures/bca-transfer.synthetic.json",
+    "fixtures/completed.synthetic.json",
+    "fixtures/failed.synthetic.json",
+    "fixtures/pending.synthetic.json"
+  ],
   "limitations": [
     "One contributor account; no independent multi-party reproduction.",
     "Only completed outgoing domestic IDR transfers validated; QRIS, bill payments, and incoming transfers stay unsupported.",
