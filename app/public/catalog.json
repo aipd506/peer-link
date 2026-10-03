@@ -3,50 +3,6 @@
   "providers": [
     {
       "schemaVersion": "1",
-      "id": "ua/monobank",
-      "name": "Monobank",
-      "country": "UA",
-      "status": "experimental",
-      "version": "0.1.0",
-      "surface": "mobile-app-statement",
-      "capability": "Interpret outgoing domestic UAH card and IBAN transfers as sender-bank-reported debits",
-      "maintainers": [
-        "aipd506"
-      ],
-      "currencies": [
-        "UAH"
-      ],
-      "unsupported": [
-        "merchant-card-purchases",
-        "utility-and-bill-payments",
-        "mobile-topup",
-        "fx-currency-exchange",
-        "incoming-credits",
-        "cash-withdrawals",
-        "jar-accumulations",
-        "cryptographic-source-authentication"
-      ],
-      "fixtureProvenance": "synthetic",
-      "logo": "/logos/monobank.png",
-      "reportCount": 1,
-      "evidence": [
-        {
-          "scope": "dc11a3315aed1b02e327d8dec64fd0d020a5f4d3:dc11a3315aed1b02e327d8dec64fd0d020a5f4d3:mobile-app-statement:outgoing-domestic-uah-transfer",
-          "reports": [
-            {
-              "reporter": "aipd506",
-              "outcome": "pass",
-              "evidenceClass": "contributor-live",
-              "testedAt": "2026-10-02T22:30:00Z"
-            }
-          ],
-          "distinctReportingHandles": 1
-        }
-      ],
-      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/ua/monobank"
-    },
-    {
-      "schemaVersion": "1",
       "id": "us/mercury",
       "name": "Mercury",
       "country": "US",
