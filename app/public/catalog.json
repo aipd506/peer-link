@@ -3,49 +3,6 @@
   "providers": [
     {
       "schemaVersion": "1",
-      "id": "ke/mpesa",
-      "name": "Safaricom M-Pesa",
-      "country": "KE",
-      "status": "experimental",
-      "version": "0.1.0",
-      "surface": "app-receipt-detail",
-      "capability": "Interpret outgoing KES Send Money transfers as sender-reported debits",
-      "maintainers": [
-        "aipd506"
-      ],
-      "currencies": [
-        "KES"
-      ],
-      "unsupported": [
-        "Lipa na M-Pesa Buy Goods",
-        "Lipa na M-Pesa Paybill",
-        "Fuliza overdraft",
-        "airtime purchases",
-        "incoming received transfers",
-        "reversals",
-        "cryptographic source authentication"
-      ],
-      "fixtureProvenance": "synthetic",
-      "logo": "/logos/14.png",
-      "reportCount": 1,
-      "evidence": [
-        {
-          "scope": "939a3975e8a0bdcd38ede58f171210fbcc0f5b15:939a3975e8a0bdcd38ede58f171210fbcc0f5b15:app-receipt-detail:outgoing-kes-send-money",
-          "reports": [
-            {
-              "reporter": "aipd506",
-              "outcome": "pass",
-              "evidenceClass": "contributor-live",
-              "testedAt": "2026-10-02T21:26:00Z"
-            }
-          ],
-          "distinctReportingHandles": 1
-        }
-      ],
-      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/ke/mpesa"
-    },
-    {
-      "schemaVersion": "1",
       "id": "us/mercury",
       "name": "Mercury",
       "country": "US",
