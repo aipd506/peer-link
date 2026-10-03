@@ -3,49 +3,6 @@
   "providers": [
     {
       "schemaVersion": "1",
-      "id": "ng/opay",
-      "name": "OPay",
-      "country": "NG",
-      "status": "experimental",
-      "version": "0.1.0",
-      "surface": "app-receipt-detail",
-      "capability": "Interpret outgoing NGN domestic transfers as sender-reported debits",
-      "maintainers": [
-        "aipd506"
-      ],
-      "currencies": [
-        "NGN"
-      ],
-      "unsupported": [
-        "airtime purchases",
-        "bill payments",
-        "betting funding",
-        "merchant QR payments",
-        "incoming received transfers",
-        "reversals",
-        "cryptographic source authentication"
-      ],
-      "fixtureProvenance": "synthetic",
-      "logo": "/logos/opay.png",
-      "reportCount": 1,
-      "evidence": [
-        {
-          "scope": "3bc0e92dda450e2235e4385d9c40eceece8bfef8:3bc0e92dda450e2235e4385d9c40eceece8bfef8:app-receipt-detail:outgoing-domestic-ngn-transfer",
-          "reports": [
-            {
-              "reporter": "aipd506",
-              "outcome": "pass",
-              "evidenceClass": "contributor-live",
-              "testedAt": "2026-10-02T21:30:00Z"
-            }
-          ],
-          "distinctReportingHandles": 1
-        }
-      ],
-      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/ng/opay"
-    },
-    {
-      "schemaVersion": "1",
       "id": "us/mercury",
       "name": "Mercury",
       "country": "US",
