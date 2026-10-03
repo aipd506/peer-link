@@ -3,52 +3,6 @@
   "providers": [
     {
       "schemaVersion": "1",
-      "id": "bd/bkash",
-      "name": "bKash",
-      "country": "BD",
-      "status": "experimental",
-      "version": "0.1.0",
-      "surface": "mobile-app-receipt",
-      "capability": "Interpret outgoing domestic BDT Send Money transfers as sender-bank-reported debits",
-      "maintainers": [
-        "aipd506"
-      ],
-      "currencies": [
-        "BDT"
-      ],
-      "unsupported": [
-        "cash-out",
-        "merchant-payments",
-        "mobile-recharge",
-        "pay-bill",
-        "add-money",
-        "remittance",
-        "savings-and-loans",
-        "incoming-credits",
-        "recipient-credit-confirmation",
-        "cryptographic-source-authentication"
-      ],
-      "fixtureProvenance": "synthetic",
-      "logo": "/logos/bkash.png",
-      "reportCount": 1,
-      "evidence": [
-        {
-          "scope": "f2c4489f7328ed6f0702ca8cac5b459ad1ced56d:f2c4489f7328ed6f0702ca8cac5b459ad1ced56d:mobile-app-receipt:outgoing-domestic-bdt-send-money",
-          "reports": [
-            {
-              "reporter": "aipd506",
-              "outcome": "pass",
-              "evidenceClass": "contributor-live",
-              "testedAt": "2026-10-02T22:30:00Z"
-            }
-          ],
-          "distinctReportingHandles": 1
-        }
-      ],
-      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/bd/bkash"
-    },
-    {
-      "schemaVersion": "1",
       "id": "us/mercury",
       "name": "Mercury",
       "country": "US",
