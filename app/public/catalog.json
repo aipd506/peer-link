@@ -3,48 +3,6 @@
   "providers": [
     {
       "schemaVersion": "1",
-      "id": "mx/bbva-mexico",
-      "name": "BBVA Mexico",
-      "country": "MX",
-      "status": "experimental",
-      "version": "0.1.0",
-      "surface": "app-receipt-detail",
-      "capability": "Interpret outgoing MXN SPEI transfers with clave de rastreo as sender reported debits",
-      "maintainers": [
-        "aipd506"
-      ],
-      "currencies": [
-        "MXN"
-      ],
-      "unsupported": [
-        "incoming received transfers",
-        "internal BBVA account transfers without clave de rastreo",
-        "cash withdrawals and ATM deposits",
-        "credit card payments",
-        "services and utility payments",
-        "cryptographic source authentication"
-      ],
-      "fixtureProvenance": "synthetic",
-      "logo": "/logos/16.png",
-      "reportCount": 1,
-      "evidence": [
-        {
-          "scope": "469bb2df9c189b1bd1de15dcc06ef94bd195b362:469bb2df9c189b1bd1de15dcc06ef94bd195b362:app-receipt-detail:outgoing-mxn-spei-transfer",
-          "reports": [
-            {
-              "reporter": "aipd506",
-              "outcome": "pass",
-              "evidenceClass": "contributor-live",
-              "testedAt": "2026-10-02T22:30:00Z"
-            }
-          ],
-          "distinctReportingHandles": 1
-        }
-      ],
-      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/mx/bbva-mexico"
-    },
-    {
-      "schemaVersion": "1",
       "id": "us/mercury",
       "name": "Mercury",
       "country": "US",
