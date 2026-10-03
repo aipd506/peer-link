@@ -3,50 +3,6 @@
   "providers": [
     {
       "schemaVersion": "1",
-      "id": "co/bancolombia",
-      "name": "Bancolombia",
-      "country": "CO",
-      "status": "experimental",
-      "version": "0.1.0",
-      "surface": "web-banking-receipt",
-      "capability": "Interpret outgoing domestic COP transfers as sender-bank-reported debits",
-      "maintainers": [
-        "aipd506"
-      ],
-      "currencies": [
-        "COP"
-      ],
-      "unsupported": [
-        "transfiya-fast-payments",
-        "international-wire-transfers",
-        "qr-code-merchant-payments",
-        "direct-debits",
-        "card-payments",
-        "incoming-credits",
-        "recipient-credit-confirmation",
-        "cryptographic-source-authentication"
-      ],
-      "fixtureProvenance": "synthetic",
-      "logo": "/logos/bancolombia.png",
-      "reportCount": 1,
-      "evidence": [
-        {
-          "scope": "5ed1f2f7f59d3bcd90cba3713c9f630e1827cc2a:5ed1f2f7f59d3bcd90cba3713c9f630e1827cc2a:web-banking-receipt:outgoing-domestic-cop-transfer",
-          "reports": [
-            {
-              "reporter": "aipd506",
-              "outcome": "pass",
-              "evidenceClass": "contributor-live",
-              "testedAt": "2026-10-02T21:30:00Z"
-            }
-          ],
-          "distinctReportingHandles": 1
-        }
-      ],
-      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/co/bancolombia"
-    },
-    {
-      "schemaVersion": "1",
       "id": "us/mercury",
       "name": "Mercury",
       "country": "US",
