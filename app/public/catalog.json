@@ -42,50 +42,6 @@
         }
       ],
       "source": "https://github.com/zkp2p/peer-link/tree/main/banks/us/mercury"
-    },
-    {
-      "schemaVersion": "1",
-      "id": "vn/vietcombank",
-      "name": "Vietcombank",
-      "country": "VN",
-      "status": "experimental",
-      "version": "0.1.0",
-      "surface": "vcb-digibank-transaction-detail",
-      "capability": "Interpret outgoing domestic VND bank account transfers as sender-bank-reported debits",
-      "maintainers": [
-        "aipd506"
-      ],
-      "currencies": [
-        "VND"
-      ],
-      "unsupported": [
-        "bill-payments",
-        "mobile-topup",
-        "qr-merchant-payments",
-        "international-remittance",
-        "incoming-credits",
-        "fixed-deposit",
-        "loan-disbursements",
-        "cryptographic-source-authentication"
-      ],
-      "fixtureProvenance": "synthetic",
-      "logo": "/logos/vietcombank.png",
-      "reportCount": 1,
-      "evidence": [
-        {
-          "scope": "3e90682f97739c20b76f455b6758509d887cfc6e:3e90682f97739c20b76f455b6758509d887cfc6e:vcb-digibank-transaction-detail:outgoing-domestic-vnd-transfer",
-          "reports": [
-            {
-              "reporter": "aipd506",
-              "outcome": "pass",
-              "evidenceClass": "contributor-live",
-              "testedAt": "2026-10-02T22:30:00Z"
-            }
-          ],
-          "distinctReportingHandles": 1
-        }
-      ],
-      "source": "https://github.com/zkp2p/peer-link/tree/main/banks/vn/vietcombank"
     }
   ]
 }
